@@ -4,8 +4,10 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import entities from '../entities';
+import { Survey } from '../survey/survey.entity';
+const entities = [Survey];
 
+export default entities;
 class TypeOrmConfig {
   static getConfig(configService: ConfigService): TypeOrmModuleOptions {
     return {
