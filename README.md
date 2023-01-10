@@ -1,6 +1,6 @@
 ## 개발환경
 
-- os: M1 Pro
+- os: mac M1 Pro
 - node version: v16.15.1
 - npm version: 8.11.0
 - postgresql version: 14.6 (Homebrew)
