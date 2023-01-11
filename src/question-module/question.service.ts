@@ -34,6 +34,9 @@ export class QuestionService {
       where: {
         id,
       },
+      relations: {
+        options: true,
+      },
     });
   }
 }
