@@ -29,5 +29,4 @@ input CreateOptionInput {
 input UpdateOptionInput {
   text: String
   order: Int
-  question_id: Int
 }

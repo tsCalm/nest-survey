@@ -4,7 +4,7 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { Survey } from '../survey/survey.entity';
+import { Survey } from '../survey-module/survey.entity';
 const entities = [Survey];
 
 export default entities;
