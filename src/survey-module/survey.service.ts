@@ -42,9 +42,7 @@ export class SurveyService {
       where: {
         id,
       },
-      relations: {
-        questions: true,
-      },
+      relations: ['questions', 'questions.options'],
     });
   }
 }

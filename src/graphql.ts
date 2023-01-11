@@ -23,12 +23,14 @@ export interface CreateQuestionInput {
     title: string;
     order: number;
     score: number;
+    is_multiple_answer?: Nullable<boolean>;
     example?: Nullable<string>;
     survey_id: number;
 }
 
 export interface UpdateQuestionInput {
     title?: Nullable<string>;
+    is_multiple_answer?: Nullable<boolean>;
     order?: Nullable<number>;
     score?: Nullable<number>;
     example?: Nullable<string>;
@@ -80,6 +82,7 @@ export interface SurveyQuestion {
     score?: Nullable<number>;
     example?: Nullable<string>;
     survey_id?: Nullable<number>;
+    is_multiple_answer?: Nullable<boolean>;
     options?: Nullable<Nullable<SurveyQuestionOption>[]>;
     created_at?: Nullable<DateTime>;
     updated_at?: Nullable<DateTime>;
