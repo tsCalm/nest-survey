@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { SurveyQuestion } from '../question-module/question.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity()
@@ -11,4 +12,7 @@ export class Survey extends BaseEntity {
 
   @Column({ type: 'text', nullable: false })
   description: string;
+
+  @OneToMany(() => SurveyQuestion, (question) => question.survey)
+  questions: SurveyQuestion[];
 }

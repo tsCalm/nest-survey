@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Survey } from '../survey-module/survey.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity()
@@ -17,4 +18,7 @@ export class SurveyQuestion extends BaseEntity {
 
   @Column()
   survey_id: number;
+
+  @ManyToOne(() => Survey, (survey) => survey.questions)
+  survey: Survey;
 }
