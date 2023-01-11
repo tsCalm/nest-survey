@@ -1,4 +1,4 @@
-type Question {
+type SurveyQuestion {
   id: Int
   title: String
   order: Int
@@ -10,13 +10,16 @@ type Question {
 }
 
 type Query {
-  questionList: [Question]
-  question(id: Int!): Question
+  questionList: [SurveyQuestion]
+  question(id: Int!): SurveyQuestion
 }
 
 type Mutation {
-  createQuestion(createQuestionInput: CreateQuestionInput): Question
-  updateQuestion(id: Int!, updateQuestionInput: UpdateQuestionInput): Question
+  createQuestion(createQuestionInput: CreateQuestionInput): SurveyQuestion
+  updateQuestion(
+    id: Int!
+    updateQuestionInput: UpdateQuestionInput
+  ): SurveyQuestion
 }
 
 input CreateQuestionInput {

@@ -1,5 +1,11 @@
 import { Survey } from '../survey-module/survey.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity()
@@ -20,5 +26,6 @@ export class SurveyQuestion extends BaseEntity {
   survey_id: number;
 
   @ManyToOne(() => Survey, (survey) => survey.questions)
+  @JoinColumn({ name: 'survey_id', referencedColumnName: 'id' })
   survey: Survey;
 }

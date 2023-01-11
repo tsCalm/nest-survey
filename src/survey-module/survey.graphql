@@ -3,6 +3,7 @@ type Survey {
   title: String!
   sub_title: String!
   description: String!
+  questions: [SurveyQuestion]
   created_at: DateTime!
   updated_at: DateTime!
 }

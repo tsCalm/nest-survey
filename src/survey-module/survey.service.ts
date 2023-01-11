@@ -36,4 +36,15 @@ export class SurveyService {
       },
     });
   }
+
+  findOneDetail(id: number) {
+    return this.surveyRepo.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        questions: true,
+      },
+    });
+  }
 }

@@ -58,8 +58,8 @@ export interface SurveyQuestionOption {
 export interface IQuery {
     optionList(): Nullable<Nullable<SurveyQuestionOption>[]> | Promise<Nullable<Nullable<SurveyQuestionOption>[]>>;
     option(id: number): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
-    questionList(): Nullable<Nullable<Question>[]> | Promise<Nullable<Nullable<Question>[]>>;
-    question(id: number): Nullable<Question> | Promise<Nullable<Question>>;
+    questionList(): Nullable<Nullable<SurveyQuestion>[]> | Promise<Nullable<Nullable<SurveyQuestion>[]>>;
+    question(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     surveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
     survey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
 }
@@ -67,13 +67,13 @@ export interface IQuery {
 export interface IMutation {
     createOption(createOptionInput?: Nullable<CreateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
     updateOption(id: number, updateOptionInput?: Nullable<UpdateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
-    createQuestion(createQuestionInput?: Nullable<CreateQuestionInput>): Nullable<Question> | Promise<Nullable<Question>>;
-    updateQuestion(id: number, updateQuestionInput?: Nullable<UpdateQuestionInput>): Nullable<Question> | Promise<Nullable<Question>>;
+    createQuestion(createQuestionInput?: Nullable<CreateQuestionInput>): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
+    updateQuestion(id: number, updateQuestionInput?: Nullable<UpdateQuestionInput>): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
 }
 
-export interface Question {
+export interface SurveyQuestion {
     id?: Nullable<number>;
     title?: Nullable<string>;
     order?: Nullable<number>;
@@ -89,6 +89,7 @@ export interface Survey {
     title: string;
     sub_title: string;
     description: string;
+    questions?: Nullable<Nullable<SurveyQuestion>[]>;
     created_at: DateTime;
     updated_at: DateTime;
 }

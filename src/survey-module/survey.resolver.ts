@@ -14,8 +14,10 @@ export class SurveyResolver {
   }
 
   @Query()
-  survey(@Args('id') id: number) {
-    return this.surveyService.findOne(id);
+  async survey(@Args('id') id: number) {
+    const result = await this.surveyService.findOneDetail(id);
+    console.log(result);
+    return result;
   }
 
   @Mutation()

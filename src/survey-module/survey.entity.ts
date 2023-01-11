@@ -1,5 +1,11 @@
 import { SurveyQuestion } from '../question-module/question.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity()
