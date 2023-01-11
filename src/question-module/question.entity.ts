@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  Index,
 } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 import { SurveyQuestionOption } from '../option-module/option.entity';
@@ -25,6 +26,7 @@ export class SurveyQuestion extends BaseEntity {
   example: string;
 
   @Column()
+  @Index()
   survey_id: number;
 
   @Column({ type: 'boolean', default: false })

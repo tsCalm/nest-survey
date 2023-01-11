@@ -5,6 +5,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  Index,
 } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
@@ -17,6 +18,7 @@ export class SurveyQuestionOption extends BaseEntity {
   order: number;
 
   @Column()
+  @Index()
   question_id: number;
 
   @ManyToOne(() => SurveyQuestion, (question) => question.options)
