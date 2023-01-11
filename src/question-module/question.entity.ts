@@ -32,7 +32,9 @@ export class SurveyQuestion extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   is_multiple_answer: boolean;
 
-  @ManyToOne(() => Survey, (survey) => survey.questions)
+  @ManyToOne(() => Survey, (survey) => survey.questions, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'survey_id', referencedColumnName: 'id' })
   survey: Survey;
 

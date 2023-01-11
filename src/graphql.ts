@@ -75,6 +75,7 @@ export interface IMutation {
     deleteQuestion(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
+    deleteSurvey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
 }
 
 export interface SurveyQuestion {

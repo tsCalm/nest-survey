@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateSurveyInput, UpdateSurveyInput } from './survey.dto';
 import { Survey } from './survey.entity';
 
@@ -44,5 +44,17 @@ export class SurveyService {
       },
       relations: ['questions', 'questions.options'],
     });
+  }
+  async delete(id: number) {
+    const findedEntity = await this.findOne(id);
+    if (!findedEntity)
+      throw new HttpException('survey not found ', HttpStatus.BAD_REQUEST);
+    const result: DeleteResult = await this.surveyRepo.delete(id);
+    if (result.affected < 1)
+      throw new HttpException(
+        'survey delete failed',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    return findedEntity;
   }
 }

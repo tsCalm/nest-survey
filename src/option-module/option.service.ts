@@ -38,8 +38,8 @@ export class OptionService {
   }
 
   async delete(id: number) {
-    const findedOption = await this.findOne(id);
-    if (!findedOption)
+    const findedEntity = await this.findOne(id);
+    if (!findedEntity)
       throw new HttpException('option not found ', HttpStatus.BAD_REQUEST);
     const result: DeleteResult = await this.optionRepo.delete(id);
     if (result.affected < 1)
@@ -47,6 +47,6 @@ export class OptionService {
         'option delete failed',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
-    return findedOption;
+    return findedEntity;
   }
 }

@@ -21,7 +21,9 @@ export class SurveyQuestionOption extends BaseEntity {
   @Index()
   question_id: number;
 
-  @ManyToOne(() => SurveyQuestion, (question) => question.options)
+  @ManyToOne(() => SurveyQuestion, (question) => question.options, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'question_id', referencedColumnName: 'id' })
   question: SurveyQuestion;
 }

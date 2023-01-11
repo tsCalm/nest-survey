@@ -32,4 +32,9 @@ export class SurveyResolver {
   ) {
     return this.surveyService.update(id, updateSurveyInput);
   }
+
+  @Mutation()
+  deleteSurvey(@Args('id') id: number) {
+    return this.surveyService.delete(id);
+  }
 }

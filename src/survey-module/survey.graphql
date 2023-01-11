@@ -16,6 +16,7 @@ type Query {
 type Mutation {
   createSurvey(createSurveyInput: CreateSurveyInput): Survey
   updateSurvey(id: Int!, updateSurveyInput: UpdateSurveyInput): Survey
+  deleteSurvey(id: Int!): Survey
 }
 
 input CreateSurveyInput {

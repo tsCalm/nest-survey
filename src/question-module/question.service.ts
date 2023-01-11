@@ -40,8 +40,8 @@ export class QuestionService {
     });
   }
   async delete(id: number) {
-    const findedOption = await this.findOne(id);
-    if (!findedOption)
+    const findedEntity = await this.findOne(id);
+    if (!findedEntity)
       throw new HttpException('question not found ', HttpStatus.BAD_REQUEST);
     const result: DeleteResult = await this.questionRepo.delete(id);
     if (result.affected < 1)
@@ -49,6 +49,6 @@ export class QuestionService {
         'question delete failed',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
-    return findedOption;
+    return findedEntity;
   }
 }
