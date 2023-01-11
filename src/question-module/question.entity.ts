@@ -27,6 +27,9 @@ export class SurveyQuestion extends BaseEntity {
   @Column()
   survey_id: number;
 
+  @Column({ type: 'boolean', default: false })
+  is_multiple_answer: boolean;
+
   @ManyToOne(() => Survey, (survey) => survey.questions)
   @JoinColumn({ name: 'survey_id', referencedColumnName: 'id' })
   survey: Survey;

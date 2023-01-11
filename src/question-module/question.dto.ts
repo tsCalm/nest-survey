@@ -1,5 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import {
+  IsBoolean,
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -23,6 +24,10 @@ export class CreateQuestionInput {
   @IsNotEmpty()
   @IsInt()
   score: number;
+
+  @IsOptional()
+  @IsBoolean()
+  is_multiple_answer: boolean;
 
   @Field()
   @IsOptional()
@@ -56,4 +61,8 @@ export class UpdateQuestionInput {
   @IsOptional()
   @IsString()
   example: string;
+
+  @IsOptional()
+  @IsBoolean()
+  is_multiple_answer: boolean;
 }

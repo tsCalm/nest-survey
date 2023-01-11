@@ -5,6 +5,7 @@ type SurveyQuestion {
   score: Int
   example: String
   survey_id: Int
+  is_multiple_answer: Boolean
   options: [SurveyQuestionOption]
   created_at: DateTime
   updated_at: DateTime
@@ -27,12 +28,14 @@ input CreateQuestionInput {
   title: String!
   order: Int!
   score: Int!
+  is_multiple_answer: Boolean
   example: String
   survey_id: Int!
 }
 
 input UpdateQuestionInput {
   title: String
+  is_multiple_answer: Boolean
   order: Int
   score: Int
   example: String
