@@ -17,10 +17,10 @@ export class QuestionService {
   }
 
   async update(id: number, updateQuestionInput: UpdateQuestionInput) {
-    const findedSurvey = await this.findOne(id);
-    if (!findedSurvey)
+    const findedOption = await this.findOne(id);
+    if (!findedOption)
       throw new HttpException('survey not found ', HttpStatus.BAD_REQUEST);
-    const updateInput = { ...findedSurvey, ...updateQuestionInput };
+    const updateInput = { ...findedOption, ...updateQuestionInput };
     const newEntity = this.questionRepo.create(updateInput);
     return this.questionRepo.save(newEntity);
   }

@@ -8,11 +8,11 @@ import {
 } from 'class-validator';
 
 @ArgsType()
-export class CreateQuestionInput {
+export class CreateOptionInput {
   @Field()
   @IsNotEmpty()
   @IsString()
-  title: string;
+  text: string;
 
   @Field()
   @IsNotEmpty()
@@ -22,38 +22,18 @@ export class CreateQuestionInput {
   @Field()
   @IsNotEmpty()
   @IsInt()
-  score: number;
-
-  @Field()
-  @IsOptional()
-  @IsString()
-  example: string;
-
-  @Field()
-  @IsNotEmpty()
-  @IsInt()
-  survey_id: number;
+  question_id: number;
 }
 
 @ArgsType()
-export class UpdateQuestionInput {
+export class UpdateOptionInput {
   @Field()
   @IsOptional()
   @IsString()
-  title: string;
+  text: string;
 
   @Field()
   @IsOptional()
   @IsInt()
   order: number;
-
-  @Field()
-  @IsOptional()
-  @IsInt()
-  score: number;
-
-  @Field()
-  @IsOptional()
-  @IsString()
-  example: string;
 }

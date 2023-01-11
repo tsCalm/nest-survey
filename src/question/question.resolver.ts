@@ -26,7 +26,7 @@ export class QuestionResolver {
   }
 
   @Mutation()
-  updateSurvey(
+  updateQuestion(
     @Args('id') id: number,
     @Args('updateQuestionInput') updateQuestionInput: UpdateQuestionInput,
   ) {

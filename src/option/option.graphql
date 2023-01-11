@@ -1,0 +1,33 @@
+type SurveyQuestionOption {
+  id: Int
+  text: String
+  order: Int
+  question_id: Int
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type Query {
+  optionList: [SurveyQuestionOption]
+  option(id: Int!): SurveyQuestionOption
+}
+
+type Mutation {
+  createOption(createOptionInput: CreateOptionInput): SurveyOptionOption
+  updateOption(
+    id: Int!
+    updateOptionInput: UpdateOptionInput
+  ): SurveyOptionOption
+}
+
+input CreateOptionInput {
+  text: String!
+  order: Int!
+  question_id: Int!
+}
+
+input UpdateOptionInput {
+  text: String
+  order: Int
+  question_id: Int
+}

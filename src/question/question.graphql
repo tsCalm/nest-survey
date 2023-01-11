@@ -1,9 +1,12 @@
 type Question {
+  id: Int
   title: String
   order: Int
   score: Int
   example: String
   survey_id: Int
+  created_at: DateTime
+  updated_at: DateTime
 }
 
 type Query {
@@ -29,5 +32,4 @@ input UpdateQuestionInput {
   order: Int
   score: Int
   example: String
-  survey_id: Int
 }
