@@ -1,0 +1,33 @@
+type Question {
+  title: String
+  order: Int
+  score: Int
+  example: String
+  survey_id: Int
+}
+
+type Query {
+  questionList: [Question]
+  question(id: Int!): Question
+}
+
+type Mutation {
+  createQuestion(createQuestionInput: CreateQuestionInput): Question
+  updateQuestion(id: Int!, updateQuestionInput: UpdateQuestionInput): Question
+}
+
+input CreateQuestionInput {
+  title: String!
+  order: Int!
+  score: Int!
+  example: String
+  survey_id: Int!
+}
+
+input UpdateQuestionInput {
+  title: String
+  order: Int
+  score: Int
+  example: String
+  survey_id: Int
+}
