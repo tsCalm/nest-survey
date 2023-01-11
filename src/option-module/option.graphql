@@ -13,11 +13,11 @@ type Query {
 }
 
 type Mutation {
-  createOption(createOptionInput: CreateOptionInput): SurveyOptionOption
+  createOption(createOptionInput: CreateOptionInput): SurveyQuestionOption
   updateOption(
     id: Int!
     updateOptionInput: UpdateOptionInput
-  ): SurveyOptionOption
+  ): SurveyQuestionOption
 }
 
 input CreateOptionInput {

@@ -1,0 +1,5 @@
+type UserSurvey {
+  survey_id: Int
+  ip: String
+  isComplete: Boolean
+}

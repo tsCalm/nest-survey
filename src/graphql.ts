@@ -8,6 +8,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface CreateOptionInput {
+    text: string;
+    order: number;
+    question_id: number;
+}
+
+export interface UpdateOptionInput {
+    text?: Nullable<string>;
+    order?: Nullable<number>;
+}
+
 export interface CreateQuestionInput {
     title: string;
     order: number;
@@ -21,7 +32,6 @@ export interface UpdateQuestionInput {
     order?: Nullable<number>;
     score?: Nullable<number>;
     example?: Nullable<string>;
-    survey_id?: Nullable<number>;
 }
 
 export interface CreateSurveyInput {
@@ -36,15 +46,18 @@ export interface UpdateSurveyInput {
     description?: Nullable<string>;
 }
 
-export interface Question {
-    title?: Nullable<string>;
+export interface SurveyQuestionOption {
+    id?: Nullable<number>;
+    text?: Nullable<string>;
     order?: Nullable<number>;
-    score?: Nullable<number>;
-    example?: Nullable<string>;
-    survey_id?: Nullable<number>;
+    question_id?: Nullable<number>;
+    created_at?: Nullable<DateTime>;
+    updated_at?: Nullable<DateTime>;
 }
 
 export interface IQuery {
+    optionList(): Nullable<Nullable<SurveyQuestionOption>[]> | Promise<Nullable<Nullable<SurveyQuestionOption>[]>>;
+    option(id: number): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
     questionList(): Nullable<Nullable<Question>[]> | Promise<Nullable<Nullable<Question>[]>>;
     question(id: number): Nullable<Question> | Promise<Nullable<Question>>;
     surveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
@@ -52,10 +65,23 @@ export interface IQuery {
 }
 
 export interface IMutation {
+    createOption(createOptionInput?: Nullable<CreateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
+    updateOption(id: number, updateOptionInput?: Nullable<UpdateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
     createQuestion(createQuestionInput?: Nullable<CreateQuestionInput>): Nullable<Question> | Promise<Nullable<Question>>;
     updateQuestion(id: number, updateQuestionInput?: Nullable<UpdateQuestionInput>): Nullable<Question> | Promise<Nullable<Question>>;
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
+}
+
+export interface Question {
+    id?: Nullable<number>;
+    title?: Nullable<string>;
+    order?: Nullable<number>;
+    score?: Nullable<number>;
+    example?: Nullable<string>;
+    survey_id?: Nullable<number>;
+    created_at?: Nullable<DateTime>;
+    updated_at?: Nullable<DateTime>;
 }
 
 export interface Survey {
@@ -65,6 +91,18 @@ export interface Survey {
     description: string;
     created_at: DateTime;
     updated_at: DateTime;
+}
+
+export interface UserResponse {
+    user_survey_id?: Nullable<number>;
+    question_id?: Nullable<number>;
+    user_answer?: Nullable<string>;
+}
+
+export interface UserSurvey {
+    survey_id?: Nullable<number>;
+    ip?: Nullable<string>;
+    isComplete?: Nullable<boolean>;
 }
 
 export type DateTime = any;

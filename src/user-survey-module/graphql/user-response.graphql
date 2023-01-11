@@ -1,0 +1,5 @@
+type UserResponse {
+  user_survey_id: Int
+  question_id: Int
+  user_answer: String
+}
