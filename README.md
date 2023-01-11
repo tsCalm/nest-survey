@@ -6,6 +6,10 @@
 - postgresql version: 14.6 (Homebrew)
 - nest-cli version: 9.0.0
 
+## 공지사항
+
+- entity 부모 엔티티 삭제 시 자식 엔티티도 같이 삭제됩니다. ( onDelete: true )
+
 ## 실행 방법
 
 1. 개발환경과 버전을 맞춰주세요.
