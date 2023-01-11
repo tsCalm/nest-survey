@@ -2,13 +2,13 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateQuestionInput, UpdateQuestionInput } from './question.dto';
-import { Question } from './question.entity';
+import { SurveyQuestion } from './question.entity';
 
 @Injectable()
 export class QuestionService {
   constructor(
-    @InjectRepository(Question)
-    private readonly questionRepo: Repository<Question>,
+    @InjectRepository(SurveyQuestion)
+    private readonly questionRepo: Repository<SurveyQuestion>,
   ) {}
 
   create(createQuestionInput: CreateQuestionInput) {

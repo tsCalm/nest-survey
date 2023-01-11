@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 
 @Entity()
-export class Question extends BaseEntity {
+export class SurveyQuestion extends BaseEntity {
   @Column({ type: 'varchar' })
   title: string;
 
