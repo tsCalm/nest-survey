@@ -5,6 +5,7 @@ type SurveyQuestion {
   score: Int
   example: String
   survey_id: Int
+  options: [SurveyQuestionOption]
   created_at: DateTime
   updated_at: DateTime
 }

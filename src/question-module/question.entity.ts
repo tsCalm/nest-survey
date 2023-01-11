@@ -5,8 +5,10 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
+import { SurveyQuestionOption } from '../option-module/option.entity';
 
 @Entity()
 export class SurveyQuestion extends BaseEntity {
@@ -28,4 +30,7 @@ export class SurveyQuestion extends BaseEntity {
   @ManyToOne(() => Survey, (survey) => survey.questions)
   @JoinColumn({ name: 'survey_id', referencedColumnName: 'id' })
   survey: Survey;
+
+  @OneToMany(() => SurveyQuestionOption, (opt) => opt.question)
+  options: SurveyQuestionOption[];
 }

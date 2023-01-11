@@ -80,6 +80,7 @@ export interface SurveyQuestion {
     score?: Nullable<number>;
     example?: Nullable<string>;
     survey_id?: Nullable<number>;
+    options?: Nullable<Nullable<SurveyQuestionOption>[]>;
     created_at?: Nullable<DateTime>;
     updated_at?: Nullable<DateTime>;
 }
