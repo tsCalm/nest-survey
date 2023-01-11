@@ -18,6 +18,7 @@ type Mutation {
     id: Int!
     updateOptionInput: UpdateOptionInput
   ): SurveyQuestionOption
+  deleteOption(id: Int!): SurveyQuestionOption
 }
 
 input CreateOptionInput {

@@ -69,8 +69,10 @@ export interface IQuery {
 export interface IMutation {
     createOption(createOptionInput?: Nullable<CreateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
     updateOption(id: number, updateOptionInput?: Nullable<UpdateOptionInput>): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
+    deleteOption(id: number): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
     createQuestion(createQuestionInput?: Nullable<CreateQuestionInput>): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     updateQuestion(id: number, updateQuestionInput?: Nullable<UpdateQuestionInput>): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
+    deleteQuestion(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
 }

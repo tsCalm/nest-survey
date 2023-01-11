@@ -32,4 +32,9 @@ export class OptionResolver {
   ) {
     return this.optionService.update(id, updateOptionInput);
   }
+
+  @Mutation()
+  deleteOption(@Args('id') id: number) {
+    return this.optionService.delete(id);
+  }
 }

@@ -32,4 +32,9 @@ export class QuestionResolver {
   ) {
     return this.questionService.update(id, updateQuestionInput);
   }
+
+  @Mutation()
+  deleteQuestion(@Args('id') id: number) {
+    return this.questionService.delete(id);
+  }
 }
