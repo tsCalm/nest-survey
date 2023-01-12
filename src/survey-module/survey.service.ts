@@ -1,28 +1,17 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BaseService } from '../common/base-service';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateSurveyInput, UpdateSurveyInput } from './survey.dto';
 import { Survey } from './survey.entity';
 
 @Injectable()
-export class SurveyService {
+export class SurveyService extends BaseService<Survey> {
   constructor(
     @InjectRepository(Survey)
     private readonly surveyRepo: Repository<Survey>,
-  ) {}
-
-  create(createSurveyInput: CreateSurveyInput) {
-    const newEntity = this.surveyRepo.create(createSurveyInput);
-    return this.surveyRepo.save(newEntity);
-  }
-
-  async update(id: number, updateSurveyInput: UpdateSurveyInput) {
-    const findedSurvey = await this.findOne(id);
-    if (!findedSurvey)
-      throw new HttpException('survey not found ', HttpStatus.BAD_REQUEST);
-    const updateInput = { ...findedSurvey, ...updateSurveyInput };
-    const newEntity = this.surveyRepo.create(updateInput);
-    return this.surveyRepo.save(newEntity);
+  ) {
+    super('survey');
   }
 
   findAll() {
@@ -37,24 +26,34 @@ export class SurveyService {
     });
   }
 
-  findOneDetail(id: number) {
-    return this.surveyRepo.findOne({
+  create(createSurveyInput: CreateSurveyInput) {
+    const newEntity = this.surveyRepo.create(createSurveyInput);
+    return this.surveyRepo.save(newEntity);
+  }
+
+  async update(id: number, updateSurveyInput: UpdateSurveyInput) {
+    const findedEntity = await this.findOne(id);
+    this.findValidate(findedEntity);
+    const newEntity = this.getNewUpdateEntity(findedEntity, updateSurveyInput);
+    return this.surveyRepo.save(newEntity);
+  }
+
+  async findOneDetail(id: number): Promise<Survey> {
+    const findedEntity = await this.surveyRepo.findOne({
       where: {
         id,
       },
       relations: ['questions', 'questions.options'],
     });
+    this.findValidate(findedEntity);
+    return findedEntity;
   }
+
   async delete(id: number) {
     const findedEntity = await this.findOne(id);
-    if (!findedEntity)
-      throw new HttpException('survey not found ', HttpStatus.BAD_REQUEST);
+    this.findValidate(findedEntity);
     const result: DeleteResult = await this.surveyRepo.delete(id);
-    if (result.affected < 1)
-      throw new HttpException(
-        'survey delete failed',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+    this.DeleteValidate(result);
     return findedEntity;
   }
 }
