@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ApolloError } from 'apollo-server-express';
+import { STATUS_CODES } from 'http';
 // import { IError } from '../common/response-class';
 // import { IResObj } from '../common/response-class';
 // import { IResObjList } from '../common/response-class';
@@ -38,17 +40,19 @@ export abstract class BaseService<T> {
   // 모든 서비스에서 찾은 엔티티의 정보가 존재하는지 여부 검색
   findValidate(obj: T): void {
     if (!obj)
-      throw new HttpException(
-        `${this.objName} not found`,
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new ApolloError(`${this.objName} not found`, STATUS_CODES[400], {
+        statusCode: 400,
+      });
   }
 
   DeleteValidate(result: DeleteResult): void {
     if (result.affected < 1)
-      throw new HttpException(
+      throw new ApolloError(
         `${this.objName} delete failed`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        STATUS_CODES[500],
+        {
+          statusCode: 500,
+        },
       );
   }
 

@@ -29,11 +29,11 @@ export class CreateOptionInput {
 export class UpdateOptionInput {
   @Field()
   @IsOptional()
-  @IsString()
+  @IsInt()
   text: string;
 
   @Field()
   @IsOptional()
-  @IsInt()
+  @IsString()
   order: number;
 }
