@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from './config';
+import { ConfigModule } from './config-module';
 import { SurveyModule } from './survey-module/survey.module';
 import { QuestionModule } from './question-module/question.module';
 import { OptionModule } from './option-module/option.module';
