@@ -17,7 +17,7 @@ export class SurveyQuestionOption extends BaseEntity {
   @Column({ type: 'smallint' })
   order: number;
 
-  @Column()
+  @Column({ type: 'int', nullable: false })
   @Index()
   question_id: number;
 

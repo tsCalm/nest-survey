@@ -25,7 +25,7 @@ export class SurveyQuestion extends BaseEntity {
   @Column({ type: 'text', default: null })
   example: string;
 
-  @Column()
+  @Column({ type: 'int', nullable: false })
   @Index()
   survey_id: number;
 
