@@ -4,11 +4,14 @@ import { NestFactory } from '@nestjs/core';
 import { ApolloError } from 'apollo-server-express';
 import { AppModule } from './app.module';
 import { STATUS_CODES } from 'http';
-import { QueryFailedExceptionFilter } from './common/query-exception.filter';
+import { QueryFailedExceptionFilter } from './filter/query-exception.filter';
+import { MyLogger } from './logger/logger.service';
 // import { CustomExceptionFilter } from './common/exception-filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'verbose'],
+  });
   const configService = app.get(ConfigService);
   app.enableCors();
   app.useGlobalPipes(
@@ -30,6 +33,7 @@ async function bootstrap() {
     new QueryFailedExceptionFilter(),
     new QueryFailedExceptionFilter(),
   );
+  app.useLogger(new MyLogger());
   const port = configService.get('PORT');
   await app.listen(port).then(async () => {
     console.log(`port: ${port} server start!!`);

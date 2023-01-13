@@ -8,7 +8,7 @@
 
 ## 요구사항
 
-- 서버 포트는 4000으로 실행
+- 서버 포트는 4000으로 실행 o
 
 - (내용) 객관식 설문지의 데이터 베이스 설계
 
@@ -18,14 +18,14 @@
 
 - API 기능 구현
 
-  - 설문지 CRUD
-  - 문항 CRUD
-  - 선택지 CRUD
+  - 설문지 CRUD o
+  - 문항 CRUD o
+  - 선택지 CRUD o
   - 답변 CRUD
   - 설문지 완료
   - 완료된 설문지 확인
 
-- 에러 처리
+- 에러 처리 o
 
   - 요청 실패 시 적절한 에러를 리턴해야 합니다.
   - 에러 응답에 제한은 없지만 일관되게 응답해야 합니다.
@@ -51,3 +51,35 @@ CREATE DATABASE survey; <-- 데이터베이스를 생성합니다.
 ```
 
 3. .env 파일의 postgresql 변수를 설정합니다.
+
+## 요구사항 해결
+
+- 에러 처리
+
+  - 요청 실패 시 적절한 에러를 리턴해야 합니다.
+
+    1. BaseService를 통해 예측 가능한 에러를 throw하도록 처리했습니다.
+    2. ExceptionFilter 인터페이스를 활용하여 gqlError와 query를 캐치하여 ApolloError를 핸들링 했습니다.
+    3. class-validator의 경우 응답 에러의 stacktrace 프로퍼티를 제외시키고 메시지를 string으로 변경하여 리턴하도록 처리했습니다.
+
+  - 에러 응답에 제한은 없지만 일관되게 응답해야 합니다.
+    1. exception filter를 활용하여 일관되게 에러를 리턴하도록 하였습니다.
+
+- 로그
+
+  - 에러 및 특이사항 발생시 로그를 확인하여 대처할 수 있게 작성
+
+    1. error, warn 로그만 console.log 되도록 설정했습니다.
+
+    ```
+    const app = await NestFactory.create(AppModule, {
+      logger: ['error', 'warn'],
+    });
+    ```
+
+    2. application이 Logger를 글로벌로 사용하도록 하였습니다.
+
+    ```
+      ...
+      app.useLogger(new MyLogger());
+    ```
