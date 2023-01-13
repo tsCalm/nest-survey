@@ -1,10 +1,15 @@
 type UserSurvey {
   survey_id: Int
-  user_id: String
+  user_id: Int
   is_complete: Boolean
 }
 
 type Mutation {
-  startSurvey(survey_id: Int!, user_id: Int!): UserSurvey
-  completeSurvey(survey_id: Int!, user_id: Int!): UserSurvey
+  startSurvey(saveUserSurveyInput: SaveUserSurveyInput): UserSurvey
+  completeSurvey(saveUserSurveyInput: SaveUserSurveyInput): UserSurvey
+}
+
+input SaveUserSurveyInput {
+  survey_id: Int!
+  user_id: Int!
 }

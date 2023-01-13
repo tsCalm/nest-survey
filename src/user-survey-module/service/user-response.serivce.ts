@@ -6,19 +6,20 @@ import { UserSurvey } from '../entity/user-survey.entity';
 import { SurveyService } from '../../survey-module/survey.service';
 import { STATUS_CODES } from 'http';
 import { ApolloError } from 'apollo-server-express';
-import { SaveUserSurveyInput } from '../dto/user-survey.dto';
+import { UserResponse } from '../entity/user-response.entity';
 
 @Injectable()
-export class UserSurveyService {
+export class UserResponseService {
   constructor(
-    @InjectRepository(UserSurvey)
-    private readonly userSurveyRepo: Repository<UserSurvey>,
+    @InjectRepository(UserResponse)
+    private readonly userResponseRepo: Repository<UserResponse>,
     private readonly surveyService: SurveyService,
   ) {}
 
   findOne(id: number) {
-    return this.userSurveyRepo.findOne({});
+    return this.userResponseRepo.findOne({});
   }
+
   private userSurveyValidate(entity: UserSurvey) {
     if (entity) {
       throw new ApolloError(
@@ -30,32 +31,24 @@ export class UserSurveyService {
       );
     }
   }
-  async create(saveUserSurveyInput: SaveUserSurveyInput) {
-    const { survey_id, user_id } = saveUserSurveyInput;
+  async save(
+    survey_id: number,
+    question_id: number,
+    user_id: number,
+    user_answer: string,
+  ) {
     const findedSurvey = await this.surveyService.findOne(survey_id);
     // 설문지가 존재하는지 검사
-    this.surveyService.findValidate(findedSurvey);
-    // 설문을 참여중인지 참여 완료인지 검사
-    const findedEntity = await this.userSurveyRepo.findOne({
-      where: saveUserSurveyInput,
-    });
-    this.userSurveyValidate(findedEntity);
-    return await this.userSurveyRepo.save(saveUserSurveyInput);
-  }
-
-  async userSurveyComplete(saveUserSurveyInput: SaveUserSurveyInput) {
-    const { survey_id, user_id } = saveUserSurveyInput;
-    const findedSurvey = await this.surveyService.findOne(survey_id);
     this.surveyService.findValidate(findedSurvey);
     const userSurveyInput = {
       survey_id,
       user_id,
     };
-    const findedEntity = await this.userSurveyRepo.findOne({
+    // 설문을 참여중인지 참여 완료인지 검사
+    const findedUuid = await this.userResponseRepo.findOne({
       where: userSurveyInput,
     });
-    findedEntity.is_complete = true;
-    this.userSurveyValidate(findedEntity);
-    return await this.userSurveyRepo.save(findedEntity);
+    // this.userSurveyValidate(findedUuid);
+    return await this.userResponseRepo.save(userSurveyInput);
   }
 }

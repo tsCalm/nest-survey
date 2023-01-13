@@ -48,6 +48,11 @@ export interface UpdateSurveyInput {
     description?: Nullable<string>;
 }
 
+export interface SaveUserSurveyInput {
+    survey_id: number;
+    user_id: number;
+}
+
 export interface SurveyQuestionOption {
     id?: Nullable<number>;
     text?: Nullable<string>;
@@ -76,8 +81,9 @@ export interface IMutation {
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     deleteSurvey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
-    startSurvey(survey_id: number, user_id: number): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
-    completeSurvey(survey_id: number, user_id: number): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    saveUserSelectOption(survey_id: number, question_id: number, user_id: number, user_answer: string): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+    startSurvey(saveUserSurveyInput?: Nullable<SaveUserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    completeSurvey(saveUserSurveyInput?: Nullable<SaveUserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
 }
 
 export interface SurveyQuestion {
@@ -104,14 +110,15 @@ export interface Survey {
 }
 
 export interface UserResponse {
-    user_survey_id?: Nullable<number>;
+    survey_id?: Nullable<number>;
     question_id?: Nullable<number>;
+    user_id?: Nullable<number>;
     user_answer?: Nullable<string>;
 }
 
 export interface UserSurvey {
     survey_id?: Nullable<number>;
-    user_id?: Nullable<string>;
+    user_id?: Nullable<number>;
     is_complete?: Nullable<boolean>;
 }
 

@@ -1,5 +1,15 @@
 type UserResponse {
-  user_survey_id: Int
+  survey_id: Int
   question_id: Int
+  user_id: Int
   user_answer: String
+}
+
+type Mutation {
+  saveUserSelectOption(
+    survey_id: Int!
+    question_id: Int!
+    user_id: Int!
+    user_answer: String!
+  ): UserResponse
 }

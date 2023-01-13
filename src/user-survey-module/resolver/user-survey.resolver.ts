@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { SaveUserSurveyInput } from '../dto/user-survey.dto';
 import { UserSurveyService } from '../service/user-survey.service';
 
 @Resolver('UserSurvey')
@@ -13,18 +14,15 @@ export class UserSurveyResolver {
 
   @Mutation()
   startSurvey(
-    @Args('survey_id') survey_id: number,
-    @Args('user_id') user_id: number,
+    @Args('saveUserSurveyInput') saveUserSurveyInput: SaveUserSurveyInput,
   ) {
-    return this.userSurveyService.create(survey_id, user_id);
+    return this.userSurveyService.create(saveUserSurveyInput);
   }
 
   @Mutation()
   completeSurvey(
-    @Args('survey_id') survey_id: number,
-    @Args('user_id') user_id: string,
+    @Args('saveUserSurveyInput') saveUserSurveyInput: SaveUserSurveyInput,
   ) {
-    return true;
-    // return this.userSurveyService.update(id, updateSurveyInput);
+    return this.userSurveyService.userSurveyComplete(saveUserSurveyInput);
   }
 }
