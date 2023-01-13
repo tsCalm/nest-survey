@@ -6,7 +6,7 @@ import { UserSurvey } from '../entity/user-survey.entity';
 import { SurveyService } from '../../survey-module/survey.service';
 import { STATUS_CODES } from 'http';
 import { ApolloError } from 'apollo-server-express';
-import { SaveUserSurveyInput } from '../dto/user-survey.dto';
+import { UserSurveyInput } from '../dto/user-survey.dto';
 
 @Injectable()
 export class UserSurveyService {
@@ -16,9 +16,34 @@ export class UserSurveyService {
     private readonly surveyService: SurveyService,
   ) {}
 
-  findOne(id: number) {
-    return this.userSurveyRepo.findOne({});
+  completedFindAll() {
+    return this.userSurveyRepo.find({
+      select: ['survey', 'user_responses'],
+      where: {
+        is_complete: true,
+      },
+      relations: ['survey', 'user_responses', 'user_responses.question'],
+    });
   }
+
+  async completedFindOne(userSurveyInput: UserSurveyInput) {
+    const result = await this.userSurveyRepo.findOne({
+      select: ['survey', 'user_responses'],
+      where: userSurveyInput,
+      relations: [
+        'survey',
+        'user_responses',
+        'user_responses.question',
+        'user_responses.question.options',
+      ],
+    });
+    // const temp = result.user_responses
+    //   .map((obj) => obj.question.options)
+    //   .flat();
+    console.log('result : ', result);
+    return result;
+  }
+
   private userSurveyValidate(entity: UserSurvey) {
     if (entity) {
       throw new ApolloError(
@@ -30,32 +55,36 @@ export class UserSurveyService {
       );
     }
   }
-  async create(saveUserSurveyInput: SaveUserSurveyInput) {
-    const { survey_id, user_id } = saveUserSurveyInput;
+  async create(userSurveyInput: UserSurveyInput) {
+    const { survey_id, user_id } = userSurveyInput;
     const findedSurvey = await this.surveyService.findOne(survey_id);
     // 설문지가 존재하는지 검사
     this.surveyService.findValidate(findedSurvey);
     // 설문을 참여중인지 참여 완료인지 검사
     const findedEntity = await this.userSurveyRepo.findOne({
-      where: saveUserSurveyInput,
+      where: userSurveyInput,
     });
     this.userSurveyValidate(findedEntity);
-    return await this.userSurveyRepo.save(saveUserSurveyInput);
+    return await this.userSurveyRepo.save(userSurveyInput);
   }
 
-  async userSurveyComplete(saveUserSurveyInput: SaveUserSurveyInput) {
-    const { survey_id, user_id } = saveUserSurveyInput;
+  async userSurveyComplete(userSurveyInput: UserSurveyInput) {
+    const { survey_id } = userSurveyInput;
     const findedSurvey = await this.surveyService.findOne(survey_id);
     this.surveyService.findValidate(findedSurvey);
-    const userSurveyInput = {
-      survey_id,
-      user_id,
-    };
     const findedEntity = await this.userSurveyRepo.findOne({
       where: userSurveyInput,
     });
+    if (findedEntity.is_complete) {
+      throw new ApolloError(
+        'already completed user survey.',
+        STATUS_CODES[400],
+        {
+          statusCode: 400,
+        },
+      );
+    }
     findedEntity.is_complete = true;
-    this.userSurveyValidate(findedEntity);
     return await this.userSurveyRepo.save(findedEntity);
   }
 }

@@ -2,14 +2,20 @@ type UserSurvey {
   survey_id: Int
   user_id: Int
   is_complete: Boolean
+  total_score: Int
+}
+
+type Query {
+  completedSurveyList: [UserSurvey]
+  completedSurvey(userSurveyInput: UserSurveyInput): UserSurvey
 }
 
 type Mutation {
-  startSurvey(saveUserSurveyInput: SaveUserSurveyInput): UserSurvey
-  completeSurvey(saveUserSurveyInput: SaveUserSurveyInput): UserSurvey
+  startSurvey(userSurveyInput: UserSurveyInput): UserSurvey
+  completeSurvey(userSurveyInput: UserSurveyInput): UserSurvey
 }
 
-input SaveUserSurveyInput {
+input UserSurveyInput {
   survey_id: Int!
   user_id: Int!
 }

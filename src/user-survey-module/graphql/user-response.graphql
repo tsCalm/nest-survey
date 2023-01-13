@@ -5,11 +5,27 @@ type UserResponse {
   user_answer: String
 }
 
+type Query {
+  userResponseList: [UserResponse]
+  userResponse(findUserResponseInput: UserResponseInput): UserResponse
+}
+
 type Mutation {
   saveUserSelectOption(
-    survey_id: Int!
-    question_id: Int!
-    user_id: Int!
-    user_answer: String!
+    saveUserResponseInput: SaveUserResponseInput
   ): UserResponse
+  deleteUserSelectOption(findUserResponseInput: UserResponseInput): UserResponse
+}
+
+input SaveUserResponseInput {
+  survey_id: Int!
+  question_id: Int!
+  user_id: Int!
+  user_answer: String!
+}
+
+input UserResponseInput {
+  survey_id: Int!
+  question_id: Int!
+  user_id: Int!
 }

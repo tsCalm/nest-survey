@@ -1,23 +1,36 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  UserResponseInput,
+  SaveUserResponseInput,
+} from '../dto/user-response.dto';
 import { UserResponseService } from '../service/user-response.serivce';
 
 @Resolver('UserResponse')
 export class UserResponseResolver {
-  constructor(private userSurveyService: UserResponseService) {}
+  constructor(private userResponseService: UserResponseService) {}
 
-  // @Query()
-  // surveyList() {
-  //   return this.userSurveyService.findAll();
-  // }
+  @Query()
+  userResponseList() {
+    return this.userResponseService.findAll();
+  }
+
+  @Query()
+  userResponse(findUserResponseInput: UserResponseInput) {
+    return this.userResponseService.findOne(findUserResponseInput);
+  }
 
   @Mutation()
   saveUserSelectOption(
-    @Args('survey_id') survey_id: number,
-    @Args('question_id') question_id: number,
-    @Args('user_id') user_id: number,
-    @Args('user_answer') user_answer: string,
+    @Args('saveUserResponseInput') saveUserResponseInput: SaveUserResponseInput,
   ) {
-    // return this.userSurveyService.save(survey_id, user_id);
+    return this.userResponseService.save(saveUserResponseInput);
+  }
+
+  @Mutation()
+  deleteUserSelectOption(
+    @Args('findUserResponseInput') findUserResponseInput: UserResponseInput,
+  ) {
+    return this.userResponseService.delete(findUserResponseInput);
   }
 }

@@ -5,6 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  AfterLoad,
 } from 'typeorm';
 import { BaseEntity } from '../../common/base-entity';
 import { Survey } from '../../survey-module/survey.entity';
@@ -18,6 +19,9 @@ export class UserSurvey {
   @PrimaryColumn({ type: 'int' })
   user_id: number;
 
+  @Column({ type: 'int', default: 0 })
+  total_score: number;
+
   @Column({ type: 'boolean', default: false })
   is_complete: boolean;
 
@@ -29,4 +33,14 @@ export class UserSurvey {
 
   @OneToMany(() => UserResponse, (userResponse) => userResponse.user_survey)
   user_responses: UserResponse[];
+
+  @AfterLoad()
+  calcTotalScore() {
+    if (this.is_complete && this.user_responses?.length > 0) {
+      const total_score = this.user_responses
+        .map((resp) => resp.question.score)
+        .reduce((cur, acc) => cur + acc, 0);
+      this.total_score = total_score;
+    }
+  }
 }

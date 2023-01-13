@@ -48,7 +48,20 @@ export interface UpdateSurveyInput {
     description?: Nullable<string>;
 }
 
-export interface SaveUserSurveyInput {
+export interface SaveUserResponseInput {
+    survey_id: number;
+    question_id: number;
+    user_id: number;
+    user_answer: string;
+}
+
+export interface UserResponseInput {
+    survey_id: number;
+    question_id: number;
+    user_id: number;
+}
+
+export interface UserSurveyInput {
     survey_id: number;
     user_id: number;
 }
@@ -69,6 +82,10 @@ export interface IQuery {
     question(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     surveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
     survey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
+    userResponseList(): Nullable<Nullable<UserResponse>[]> | Promise<Nullable<Nullable<UserResponse>[]>>;
+    userResponse(findUserResponseInput?: Nullable<UserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+    completedSurveyList(): Nullable<Nullable<UserSurvey>[]> | Promise<Nullable<Nullable<UserSurvey>[]>>;
+    completedSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
 }
 
 export interface IMutation {
@@ -81,9 +98,10 @@ export interface IMutation {
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     deleteSurvey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
-    saveUserSelectOption(survey_id: number, question_id: number, user_id: number, user_answer: string): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
-    startSurvey(saveUserSurveyInput?: Nullable<SaveUserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
-    completeSurvey(saveUserSurveyInput?: Nullable<SaveUserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    saveUserSelectOption(saveUserResponseInput?: Nullable<SaveUserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+    deleteUserSelectOption(findUserResponseInput?: Nullable<UserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
+    startSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    completeSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
 }
 
 export interface SurveyQuestion {
@@ -120,6 +138,7 @@ export interface UserSurvey {
     survey_id?: Nullable<number>;
     user_id?: Nullable<number>;
     is_complete?: Nullable<boolean>;
+    total_score?: Nullable<number>;
 }
 
 export type DateTime = any;

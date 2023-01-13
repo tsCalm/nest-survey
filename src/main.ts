@@ -10,7 +10,7 @@ import { GqlExceptionFilter } from './filter/gql-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn', 'verbose'],
+    logger: ['error', 'warn'],
   });
   const configService = app.get(ConfigService);
   app.enableCors();

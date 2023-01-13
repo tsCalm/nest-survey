@@ -7,48 +7,35 @@ import { SurveyService } from '../../survey-module/survey.service';
 import { STATUS_CODES } from 'http';
 import { ApolloError } from 'apollo-server-express';
 import { UserResponse } from '../entity/user-response.entity';
+import {
+  SaveUserResponseInput,
+  UserResponseInput,
+} from '../dto/user-response.dto';
 
 @Injectable()
 export class UserResponseService {
   constructor(
     @InjectRepository(UserResponse)
-    private readonly userResponseRepo: Repository<UserResponse>,
-    private readonly surveyService: SurveyService,
+    private readonly userResponseRepo: Repository<UserResponse>, // private readonly surveyService: SurveyService,
   ) {}
 
-  findOne(id: number) {
-    return this.userResponseRepo.findOne({});
+  findAll() {
+    return this.userResponseRepo.find({});
   }
 
-  private userSurveyValidate(entity: UserSurvey) {
-    if (entity) {
-      throw new ApolloError(
-        'You are already participating.',
-        STATUS_CODES[400],
-        {
-          statusCode: 400,
-        },
-      );
-    }
-  }
-  async save(
-    survey_id: number,
-    question_id: number,
-    user_id: number,
-    user_answer: string,
-  ) {
-    const findedSurvey = await this.surveyService.findOne(survey_id);
-    // 설문지가 존재하는지 검사
-    this.surveyService.findValidate(findedSurvey);
-    const userSurveyInput = {
-      survey_id,
-      user_id,
-    };
-    // 설문을 참여중인지 참여 완료인지 검사
-    const findedUuid = await this.userResponseRepo.findOne({
-      where: userSurveyInput,
+  findOne(findUserResponseInput: UserResponseInput) {
+    return this.userResponseRepo.findOne({
+      where: findUserResponseInput,
     });
-    // this.userSurveyValidate(findedUuid);
-    return await this.userResponseRepo.save(userSurveyInput);
+  }
+
+  async save(saveUserResponseInput: SaveUserResponseInput) {
+    console.log('saveUserResponseInput : ', saveUserResponseInput);
+    const instance = this.userResponseRepo.create(saveUserResponseInput);
+    return await this.userResponseRepo.save(instance);
+  }
+
+  delete(findUserResponseInput: UserResponseInput) {
+    return this.userResponseRepo.delete(findUserResponseInput);
   }
 }
