@@ -7,5 +7,6 @@ import { SurveyService } from './survey.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Survey])],
   providers: [SurveyService, SurveyResolver],
+  exports: [SurveyService],
 })
 export class SurveyModule {}

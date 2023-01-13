@@ -1,13 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { BaseEntity } from '../../common/base-entity';
-
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
 @Entity()
-export class UserSurvey extends BaseEntity {
-  @Column()
+export class UserSurvey {
+  @PrimaryColumn()
   survey_id: number;
 
-  @Column({ type: 'varchar', nullable: false })
-  ip: string;
+  @PrimaryColumn({ type: 'int', primary: true })
+  user_id: number;
 
   @Column({ type: 'boolean', default: false })
   isComplete: boolean;

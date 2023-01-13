@@ -6,7 +6,7 @@ import { AppModule } from './app.module';
 import { STATUS_CODES } from 'http';
 import { QueryFailedExceptionFilter } from './filter/query-exception.filter';
 import { MyLogger } from './logger/logger.service';
-// import { CustomExceptionFilter } from './common/exception-filter';
+import { GqlExceptionFilter } from './filter/gql-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -31,7 +31,7 @@ async function bootstrap() {
   );
   app.useGlobalFilters(
     new QueryFailedExceptionFilter(),
-    new QueryFailedExceptionFilter(),
+    new GqlExceptionFilter(),
   );
   app.useLogger(new MyLogger());
   const port = configService.get('PORT');

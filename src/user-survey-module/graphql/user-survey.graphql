@@ -1,5 +1,10 @@
 type UserSurvey {
   survey_id: Int
-  ip: String
+  user_id: String
   isComplete: Boolean
+}
+
+type Mutation {
+  startSurvey(survey_id: Int!, user_id: Int!): UserSurvey
+  completeSurvey(survey_id: Int!, user_id: Int!): UserSurvey
 }

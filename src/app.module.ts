@@ -5,7 +5,7 @@ import { ConfigModule } from './config-module';
 import { SurveyModule } from './survey-module/survey.module';
 import { QuestionModule } from './question-module/question.module';
 import { OptionModule } from './option-module/option.module';
-import { UserSurveyModuleModule } from './user-survey-module/user-survey-module.module';
+import { UserSurveyModule } from './user-survey-module/user-survey.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { UserSurveyModuleModule } from './user-survey-module/user-survey-module.
     SurveyModule,
     QuestionModule,
     OptionModule,
-    UserSurveyModuleModule,
+    UserSurveyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
