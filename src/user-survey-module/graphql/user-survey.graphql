@@ -1,7 +1,7 @@
 type UserSurvey {
   survey_id: Int
   user_id: String
-  isComplete: Boolean
+  is_complete: Boolean
 }
 
 type Mutation {

@@ -112,7 +112,7 @@ export interface UserResponse {
 export interface UserSurvey {
     survey_id?: Nullable<number>;
     user_id?: Nullable<string>;
-    isComplete?: Nullable<boolean>;
+    is_complete?: Nullable<boolean>;
 }
 
 export type DateTime = any;

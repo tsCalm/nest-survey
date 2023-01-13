@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 import { SurveyQuestionOption } from '../option-module/option.entity';
+import { UserResponse } from '../user-survey-module/entity/user-response.entity';
 
 @Entity()
 export class SurveyQuestion extends BaseEntity {
@@ -40,4 +41,7 @@ export class SurveyQuestion extends BaseEntity {
 
   @OneToMany(() => SurveyQuestionOption, (opt) => opt.question)
   options: SurveyQuestionOption[];
+
+  @OneToMany(() => UserResponse, (userResponse) => userResponse.question)
+  user_responses: UserResponse[];
 }
