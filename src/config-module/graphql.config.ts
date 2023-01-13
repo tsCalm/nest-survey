@@ -6,6 +6,7 @@ import { ApolloError } from 'apollo-server-errors';
 import { UserInputError } from 'apollo-server-express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { join } from 'path';
+import { QueryFailedError } from 'typeorm';
 //import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/cacheControl';
 //import { InMemoryCache, ApolloClient } from '@apollo/client';
 

@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { ApolloError } from 'apollo-server-express';
 import { AppModule } from './app.module';
 import { STATUS_CODES } from 'http';
+import { QueryFailedExceptionFilter } from './common/query-exception.filter';
 // import { CustomExceptionFilter } from './common/exception-filter';
 
 async function bootstrap() {
@@ -25,7 +26,10 @@ async function bootstrap() {
       },
     }),
   );
-  // app.useGlobalFilters(new CustomExceptionFilter());
+  app.useGlobalFilters(
+    new QueryFailedExceptionFilter(),
+    new QueryFailedExceptionFilter(),
+  );
   const port = configService.get('PORT');
   await app.listen(port).then(async () => {
     console.log(`port: ${port} server start!!`);
