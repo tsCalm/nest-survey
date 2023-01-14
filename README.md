@@ -12,9 +12,13 @@
 
 - (내용) 객관식 설문지의 데이터 베이스 설계
 
-  - 문항별 점수가 존재한다. o
-  - 설문지는 답변을 체크할 수 있다. o
-  - 답변의 총점을 확인할 수 있다. o
+  - 문항별 점수가 존재한다.
+    - SurveyQuestion Entity -> score가 문항별 점수입니다.
+  - 설문지는 답변을 체크할 수 있다.
+    - UserResponse Entity가 생성 시 유저가 답변했다고 판단합니다.
+  - 답변의 총점을 확인할 수 있다.
+    - Survey -> total_score는 시험지 총점을 의미합니다.
+    - UserSurvey -> user_total_score는 유저 응답 총점을 의미합니다.
 
 - API 기능 구현
 
