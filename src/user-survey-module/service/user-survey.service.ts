@@ -16,6 +16,17 @@ export class UserSurveyService {
     private readonly surveyService: SurveyService,
   ) {}
 
+  async isComplete(survey_id: number, user_id: number) {
+    const { is_complete } = await this.userSurveyRepo.findOne({
+      select: ['is_complete'],
+      where: {
+        survey_id,
+        user_id,
+      },
+    });
+    return is_complete;
+  }
+
   completedFindAll() {
     return this.userSurveyRepo.find({
       select: ['survey', 'user_responses'],
