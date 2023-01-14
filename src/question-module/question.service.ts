@@ -38,7 +38,7 @@ export class QuestionService extends BaseService<SurveyQuestion> {
     this.surveyService.findValidate(findedEntity);
     this.surveyService.completeSurveyValidate(findedEntity.is_complete);
     const newEntity = this.questionRepo.create(createQuestionInput);
-    return this.questionRepo.save(newEntity);
+    return await this.questionRepo.save(newEntity);
   }
 
   async update(id: number, updateQuestionInput: UpdateQuestionInput) {
@@ -52,7 +52,7 @@ export class QuestionService extends BaseService<SurveyQuestion> {
       findedEntity,
       updateQuestionInput,
     );
-    return this.questionRepo.save(newEntity);
+    return await this.questionRepo.save(newEntity);
   }
 
   async delete(id: number) {

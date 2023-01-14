@@ -76,7 +76,7 @@ export class SurveyService extends BaseService<Survey> {
     this.findValidate(findedEntity);
     this.completeSurveyValidate(findedEntity.is_complete);
     const newEntity = this.getNewUpdateEntity(findedEntity, updateSurveyInput);
-    return this.surveyRepo.save(newEntity);
+    return await this.surveyRepo.save(newEntity);
   }
 
   async completeSurvey(id: number) {
@@ -85,7 +85,7 @@ export class SurveyService extends BaseService<Survey> {
     findedEntity.is_complete = true;
     const totalScore = await this.calcTotalScore(id);
     findedEntity.total_score = totalScore;
-    return this.surveyRepo.save(findedEntity);
+    return await this.surveyRepo.save(findedEntity);
   }
   async delete(id: number) {
     const findedEntity = await this.findOne(id);
