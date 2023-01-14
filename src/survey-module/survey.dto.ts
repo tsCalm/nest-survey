@@ -11,7 +11,7 @@ export class CreateSurveyInput {
   @Field()
   @IsNotEmpty()
   @IsString()
-  sub_title: string;
+  goodbye_message: string;
 
   @Field()
   @IsNotEmpty()
@@ -29,7 +29,7 @@ export class UpdateSurveyInput {
   @Field()
   @IsOptional()
   @IsString()
-  sub_title: string;
+  goodbye_message: string;
 
   @Field()
   @IsOptional()

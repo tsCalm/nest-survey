@@ -4,6 +4,8 @@ import { BaseService } from '../common/base-service';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateSurveyInput, UpdateSurveyInput } from './survey.dto';
 import { Survey } from './survey.entity';
+import { ApolloError } from 'apollo-server-express';
+import { STATUS_CODES } from 'http';
 
 @Injectable()
 export class SurveyService extends BaseService<Survey> {
@@ -12,6 +14,28 @@ export class SurveyService extends BaseService<Survey> {
     private readonly surveyRepo: Repository<Survey>,
   ) {
     super('survey');
+  }
+  async calcTotalScore(survey_id: number) {
+    const { questions } = await this.surveyRepo.findOne({
+      select: ['questions'],
+      where: {
+        id: survey_id,
+      },
+      relations: ['questions'],
+    });
+
+    if (!questions) return 0;
+
+    return questions.map((obj) => obj.score).reduce((acc, cur) => acc + cur, 0);
+  }
+  async getIsComplete(id: number) {
+    const { is_complete } = await this.surveyRepo.findOne({
+      select: ['is_complete'],
+      where: {
+        id,
+      },
+    });
+    return is_complete;
   }
 
   findAll() {
@@ -26,18 +50,6 @@ export class SurveyService extends BaseService<Survey> {
     });
   }
 
-  create(createSurveyInput: CreateSurveyInput) {
-    const newEntity = this.surveyRepo.create(createSurveyInput);
-    return this.surveyRepo.save(newEntity);
-  }
-
-  async update(id: number, updateSurveyInput: UpdateSurveyInput) {
-    const findedEntity = await this.findOne(id);
-    this.findValidate(findedEntity);
-    const newEntity = this.getNewUpdateEntity(findedEntity, updateSurveyInput);
-    return this.surveyRepo.save(newEntity);
-  }
-
   async findOneDetail(id: number): Promise<Survey> {
     const findedEntity = await this.surveyRepo.findOne({
       where: {
@@ -49,6 +61,31 @@ export class SurveyService extends BaseService<Survey> {
     return findedEntity;
   }
 
+  create(createSurveyInput: CreateSurveyInput) {
+    const newEntity = this.surveyRepo.create(createSurveyInput);
+    return this.surveyRepo.save(newEntity);
+  }
+
+  async update(id: number, updateSurveyInput: UpdateSurveyInput) {
+    const findedEntity = await this.findOne(id);
+    this.findValidate(findedEntity);
+    if (findedEntity.is_complete) {
+      throw new ApolloError(`Completed user survey.`, STATUS_CODES[400], {
+        statusCode: 400,
+      });
+    }
+    const newEntity = this.getNewUpdateEntity(findedEntity, updateSurveyInput);
+    return this.surveyRepo.save(newEntity);
+  }
+
+  async completeSurvey(id: number) {
+    const findedEntity = await this.findOne(id);
+    this.findValidate(findedEntity);
+    findedEntity.is_complete = true;
+    const totalScore = await this.calcTotalScore(id);
+    findedEntity.total_score = totalScore;
+    return this.surveyRepo.save(findedEntity);
+  }
   async delete(id: number) {
     const findedEntity = await this.findOne(id);
     this.findValidate(findedEntity);

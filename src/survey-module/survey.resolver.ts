@@ -37,4 +37,9 @@ export class SurveyResolver {
   deleteSurvey(@Args('id') id: number) {
     return this.surveyService.delete(id);
   }
+
+  @Mutation()
+  completeSurvey(@Args('id') id: number) {
+    return this.surveyService.completeSurvey(id);
+  }
 }

@@ -38,13 +38,13 @@ export interface UpdateQuestionInput {
 
 export interface CreateSurveyInput {
     title: string;
-    sub_title: string;
+    goodbye_message: string;
     description: string;
 }
 
 export interface UpdateSurveyInput {
     title?: Nullable<string>;
-    sub_title?: Nullable<string>;
+    goodbye_message?: Nullable<string>;
     description?: Nullable<string>;
 }
 
@@ -98,10 +98,11 @@ export interface IMutation {
     createSurvey(createSurveyInput?: Nullable<CreateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     updateSurvey(id: number, updateSurveyInput?: Nullable<UpdateSurveyInput>): Nullable<Survey> | Promise<Nullable<Survey>>;
     deleteSurvey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
+    completeSurvey(id?: Nullable<number>): Nullable<Survey> | Promise<Nullable<Survey>>;
     saveUserSelectOption(saveUserResponseInput?: Nullable<SaveUserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
     deleteUserSelectOption(findUserResponseInput?: Nullable<UserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
-    startSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
-    completeSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    startUserSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
+    completeUserSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
 }
 
 export interface SurveyQuestion {
@@ -120,7 +121,9 @@ export interface SurveyQuestion {
 export interface Survey {
     id: number;
     title: string;
-    sub_title: string;
+    goodbye_message: string;
+    total_score?: Nullable<number>;
+    is_complete?: Nullable<boolean>;
     description: string;
     questions?: Nullable<Nullable<SurveyQuestion>[]>;
     created_at: DateTime;
@@ -138,7 +141,7 @@ export interface UserSurvey {
     survey_id?: Nullable<number>;
     user_id?: Nullable<number>;
     is_complete?: Nullable<boolean>;
-    total_score?: Nullable<number>;
+    user_total_score?: Nullable<number>;
 }
 
 export type DateTime = any;

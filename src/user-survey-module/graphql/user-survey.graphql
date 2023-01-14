@@ -2,7 +2,7 @@ type UserSurvey {
   survey_id: Int
   user_id: Int
   is_complete: Boolean
-  total_score: Int
+  user_total_score: Int
 }
 
 type Query {
@@ -11,8 +11,8 @@ type Query {
 }
 
 type Mutation {
-  startSurvey(userSurveyInput: UserSurveyInput): UserSurvey
-  completeSurvey(userSurveyInput: UserSurveyInput): UserSurvey
+  startUserSurvey(userSurveyInput: UserSurveyInput): UserSurvey
+  completeUserSurvey(userSurveyInput: UserSurveyInput): UserSurvey
 }
 
 input UserSurveyInput {

@@ -20,7 +20,7 @@ export class UserSurvey {
   user_id: number;
 
   @Column({ type: 'int', default: 0 })
-  total_score: number;
+  user_total_score: number;
 
   @Column({ type: 'boolean', default: false })
   is_complete: boolean;
@@ -37,10 +37,10 @@ export class UserSurvey {
   @AfterLoad()
   calcTotalScore() {
     if (this.is_complete && this.user_responses?.length > 0) {
-      const total_score = this.user_responses
+      const user_total_score = this.user_responses
         .map((resp) => resp.question.score)
         .reduce((cur, acc) => cur + acc, 0);
-      this.total_score = total_score;
+      this.user_total_score = user_total_score;
     }
   }
 }

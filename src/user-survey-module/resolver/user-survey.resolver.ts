@@ -18,12 +18,14 @@ export class UserSurveyResolver {
   }
 
   @Mutation()
-  startSurvey(@Args('userSurveyInput') userSurveyInput: UserSurveyInput) {
+  startUserSurvey(@Args('userSurveyInput') userSurveyInput: UserSurveyInput) {
     return this.userSurveyService.create(userSurveyInput);
   }
 
   @Mutation()
-  completeSurvey(@Args('userSurveyInput') userSurveyInput: UserSurveyInput) {
+  completeUserSurvey(
+    @Args('userSurveyInput') userSurveyInput: UserSurveyInput,
+  ) {
     return this.userSurveyService.userSurveyComplete(userSurveyInput);
   }
 }

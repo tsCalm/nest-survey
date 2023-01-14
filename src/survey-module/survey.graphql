@@ -1,7 +1,9 @@
 type Survey {
   id: Int!
   title: String!
-  sub_title: String!
+  goodbye_message: String!
+  total_score: Int
+  is_complete: Boolean
   description: String!
   questions: [SurveyQuestion]
   created_at: DateTime!
@@ -17,16 +19,17 @@ type Mutation {
   createSurvey(createSurveyInput: CreateSurveyInput): Survey
   updateSurvey(id: Int!, updateSurveyInput: UpdateSurveyInput): Survey
   deleteSurvey(id: Int!): Survey
+  completeSurvey(id: Int): Survey
 }
 
 input CreateSurveyInput {
   title: String!
-  sub_title: String!
+  goodbye_message: String!
   description: String!
 }
 
 input UpdateSurveyInput {
   title: String
-  sub_title: String
+  goodbye_message: String
   description: String
 }
