@@ -37,7 +37,12 @@ export class SurveyService extends BaseService<Survey> {
     });
     return is_complete;
   }
-
+  completeSurveyValidate(is_complete: boolean) {
+    if (is_complete)
+      throw new ApolloError(`Completed user survey.`, STATUS_CODES[400], {
+        statusCode: 400,
+      });
+  }
   findAll() {
     return this.surveyRepo.find();
   }
@@ -69,11 +74,7 @@ export class SurveyService extends BaseService<Survey> {
   async update(id: number, updateSurveyInput: UpdateSurveyInput) {
     const findedEntity = await this.findOne(id);
     this.findValidate(findedEntity);
-    if (findedEntity.is_complete) {
-      throw new ApolloError(`Completed user survey.`, STATUS_CODES[400], {
-        statusCode: 400,
-      });
-    }
+    this.completeSurveyValidate(findedEntity.is_complete);
     const newEntity = this.getNewUpdateEntity(findedEntity, updateSurveyInput);
     return this.surveyRepo.save(newEntity);
   }
