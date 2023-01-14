@@ -14,10 +14,6 @@ export abstract class BaseService<T> {
   constructor(objName: string) {
     this.objName = objName;
   }
-  // abstract findAll(): Promise<T[]>;
-  // abstract findOne(id: number): Promise<T>;
-  // abstract update(id: number, obj: object): Promise<T>;
-  // abstract delete(id: number): Promise<T>;
 
   findValidate(obj: T): void {
     if (!obj)

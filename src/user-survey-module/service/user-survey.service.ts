@@ -9,12 +9,14 @@ import { ApolloError } from 'apollo-server-express';
 import { UserSurveyInput } from '../dto/user-survey.dto';
 
 @Injectable()
-export class UserSurveyService {
+export class UserSurveyService extends BaseService<UserSurvey> {
   constructor(
     @InjectRepository(UserSurvey)
     private readonly userSurveyRepo: Repository<UserSurvey>,
     private readonly surveyService: SurveyService,
-  ) {}
+  ) {
+    super('userSurvey');
+  }
 
   async isComplete(survey_id: number, user_id: number) {
     const { is_complete } = await this.userSurveyRepo.findOne({
@@ -38,7 +40,7 @@ export class UserSurveyService {
   }
 
   async completedFindOne(userSurveyInput: UserSurveyInput) {
-    const result = await this.userSurveyRepo.findOne({
+    const findedCompleteSurvey = await this.userSurveyRepo.findOne({
       select: ['survey', 'user_responses'],
       where: userSurveyInput,
       relations: [
@@ -48,13 +50,10 @@ export class UserSurveyService {
         'user_responses.question.options',
       ],
     });
-    // const temp = result.user_responses
-    //   .map((obj) => obj.question.options)
-    //   .flat();
-    console.log('result : ', result);
-    return result;
+    this.findValidate(findedCompleteSurvey);
+    return findedCompleteSurvey;
   }
-
+  // 설문을 참여중인지 참여 완료인지 검사
   private userSurveyValidate(entity: UserSurvey) {
     if (entity) {
       throw new ApolloError(
@@ -69,9 +68,7 @@ export class UserSurveyService {
   async create(userSurveyInput: UserSurveyInput) {
     const { survey_id, user_id } = userSurveyInput;
     const findedSurvey = await this.surveyService.findOne(survey_id);
-    // 설문지가 존재하는지 검사
     this.surveyService.findValidate(findedSurvey);
-    // 설문을 참여중인지 참여 완료인지 검사
     const findedEntity = await this.userSurveyRepo.findOne({
       where: userSurveyInput,
     });
