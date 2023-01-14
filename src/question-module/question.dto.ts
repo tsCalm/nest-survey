@@ -65,4 +65,9 @@ export class UpdateQuestionInput {
   @IsOptional()
   @IsBoolean()
   is_multiple_answer: boolean;
+
+  @Field()
+  @IsNotEmpty()
+  @IsInt()
+  survey_id: number;
 }

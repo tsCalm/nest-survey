@@ -40,4 +40,5 @@ input UpdateQuestionInput {
   order: Int
   score: Int
   example: String
+  survey_id: Int!
 }

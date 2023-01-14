@@ -34,6 +34,7 @@ export interface UpdateQuestionInput {
     order?: Nullable<number>;
     score?: Nullable<number>;
     example?: Nullable<string>;
+    survey_id: number;
 }
 
 export interface CreateSurveyInput {
