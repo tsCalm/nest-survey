@@ -143,6 +143,8 @@ export interface UserSurvey {
     user_id?: Nullable<number>;
     is_complete?: Nullable<boolean>;
     user_total_score?: Nullable<number>;
+    survey?: Nullable<Survey>;
+    user_responses?: Nullable<Nullable<UserResponse>[]>;
 }
 
 export type DateTime = any;

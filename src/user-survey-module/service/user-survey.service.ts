@@ -49,12 +49,15 @@ export class UserSurveyService extends BaseService<UserSurvey> {
       where: userSurveyInput,
       relations: [
         'survey',
+        'survey.questions',
+        'survey.questions.options',
         'user_responses',
         'user_responses.question',
         'user_responses.question.options',
       ],
     });
     this.findValidate(findedCompleteSurvey);
+    console.log('findedCompleteSurvey : ', findedCompleteSurvey);
     return findedCompleteSurvey;
   }
   // 설문을 참여중인지 참여 완료인지 검사
@@ -72,6 +75,11 @@ export class UserSurveyService extends BaseService<UserSurvey> {
   async create(userSurveyInput: UserSurveyInput) {
     const { survey_id, user_id } = userSurveyInput;
     const findedSurvey = await this.surveyService.findOne(survey_id);
+    console.log('findedSurvey : ', findedSurvey);
+    if (!findedSurvey.is_complete)
+      throw new ApolloError('Can not participate', STATUS_CODES[400], {
+        statusCode: 400,
+      });
     this.surveyService.findValidate(findedSurvey);
     const findedEntity = await this.userSurveyRepo.findOne({
       where: userSurveyInput,
@@ -88,7 +96,7 @@ export class UserSurveyService extends BaseService<UserSurvey> {
       where: userSurveyInput,
       relations: ['user_responses', 'user_responses.question'],
     });
-    if (findedEntity.is_complete) {
+    if (findedEntity?.is_complete) {
       throw new ApolloError(
         'already completed user survey.',
         STATUS_CODES[400],
@@ -99,8 +107,11 @@ export class UserSurveyService extends BaseService<UserSurvey> {
     }
     const questions = findedEntity.user_responses.map((obj) => obj.question);
     const userTotalScore = this.calcUserTotalScore(questions);
-    findedEntity.is_complete = true;
-    findedEntity.user_total_score = userTotalScore;
-    return await this.userSurveyRepo.save(findedEntity);
+    return await this.userSurveyRepo.save({
+      survey_id: findedEntity.survey_id,
+      user_id: findedEntity.user_id,
+      is_complete: true,
+      user_total_score: userTotalScore,
+    });
   }
 }

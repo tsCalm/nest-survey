@@ -18,6 +18,10 @@ const surveySeedTemplate = (id: number) => {
 
 export const SeedSurvey = async (connection: DataSource) => {
   // let connection = await getConnection();
+  const findedEntity = await connection.manager
+    .getRepository(Survey)
+    .find({ take: 4 });
+  if (findedEntity.length > 0) return [];
   const ids = [1, 2, 3, 4];
   const seedData = ids.map((id) => surveySeedTemplate(id));
   return await connection.manager.getRepository(Survey).save(seedData);

@@ -3,6 +3,8 @@ type UserSurvey {
   user_id: Int
   is_complete: Boolean
   user_total_score: Int
+  survey: Survey
+  user_responses: [UserResponse]
 }
 
 type Query {

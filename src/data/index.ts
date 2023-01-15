@@ -19,17 +19,13 @@ const getConnection = async () => {
   return await datasource.initialize();
 };
 
-(async () => {
+export const createDummyData = async () => {
   const connection = await getConnection();
   const surveyList = await SeedSurvey(connection);
-  const questionList = [];
   for (let survey of surveyList) {
     const questions = await SeedQuestion(connection, survey.id);
-    // const options = questions.map((q) => SeedOption(connection, q));
-    // console.log('options : ', options);
-    // Promise.all(options);
     for (let question of questions) {
       await SeedOption(connection, question);
     }
   }
-})();
+};

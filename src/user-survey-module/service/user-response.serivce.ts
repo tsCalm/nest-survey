@@ -53,6 +53,17 @@ export class UserResponseService extends BaseService<UserResponse> {
       saveUserResponseInput.user_id,
     );
     this.completeValidate(isComplete);
+    const findUserResponse = await this.userResponseRepo.findOne({
+      where: {
+        survey_id: saveUserResponseInput.survey_id,
+        question_id: saveUserResponseInput.question_id,
+        user_id: saveUserResponseInput.user_id,
+      },
+    });
+    if (findUserResponse) {
+      findUserResponse.user_answer = saveUserResponseInput.user_answer;
+      return await this.userResponseRepo.save(findUserResponse);
+    }
     const instance = this.userResponseRepo.create(saveUserResponseInput);
     return await this.userResponseRepo.save(instance);
   }
