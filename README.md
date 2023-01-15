@@ -71,7 +71,13 @@
     3. class-validator의 경우 응답 에러의 stacktrace 프로퍼티를 제외시키고 메시지를 string으로 변경하여 리턴하도록 처리했습니다.
 
   - 에러 응답에 제한은 없지만 일관되게 응답해야 합니다.
+
     1. exception filter를 활용하여 일관되게 에러를 리턴하도록 하였습니다.
+
+  - 결과
+    - <img width="300" height="300" alt="스크린샷 2023-01-13 오후 12 42 46" src="https://user-images.githubusercontent.com/106916440/212527660-628667ee-f25e-484d-ba2f-fe8fad6d20b5.png">
+    - <img width="300" height="300" alt="스크린샷 2023-01-13 오후 12 42 46" src="https://user-images.githubusercontent.com/106916440/212527669-86d96f2f-850d-441c-a90b-b60920bc2276.png">
+    - <img width="300" height="300" alt="스크린샷 2023-01-13 오후 12 42 46" src="https://user-images.githubusercontent.com/106916440/212527679-8c0172ca-3e01-4e50-9d90-0eb9c9e7f2ac.png">
 
 - 로그
 
@@ -91,21 +97,6 @@
       ...
       app.useLogger(new MyLogger());
     ```
-
-## 공지사항
-
-- entity 부모 엔티티 삭제 시 자식 엔티티도 같이 삭제됩니다. ( onDelete: true )
-- 설문지의 is_complete 컬럼이 true인 경우만 유저가 설문지에 응답할 수 있습니다.
-- 설문지의 is_complete 컬럼이 true일 경우 수정 삭제가 불가능합니다.
-- 유저 테이블은 따로 존재하지 않습니다.
-
-## 시나리오
-
-1. 설문지, 문항, 보기 리스트를 생성합니다.
-2. 설문지 생성 완료 요청을 보냅니다. (survey.is_complete= true)
-3. 설문지 생성이 완료된 설문지에 설문 참가 요청을 보냅니다.
-4. 설문지 응답을 완료한 후 유저 설문 응답 완료 요청을 보냅니다. (user_survey.is_complete = true)
-5. 완료된 설문을 확인할 수 있습니다.
 
 ## 실행 방법
 
@@ -128,3 +119,18 @@ CREATE DATABASE survey; <-- 데이터베이스를 생성합니다.
 npm i
 npm run start:dev
 ```
+
+## 시나리오
+
+1. 설문지, 문항, 보기 리스트를 생성합니다.
+2. 설문지 생성 완료 요청을 보냅니다. (survey.is_complete= true)
+3. 설문지 생성이 완료된 설문지에 설문 참가 요청을 보냅니다.
+4. 설문지 응답을 완료한 후 유저 설문 응답 완료 요청을 보냅니다. (user_survey.is_complete = true)
+5. 완료된 설문을 확인할 수 있습니다.
+
+## 공지사항
+
+- entity 부모 엔티티 삭제 시 자식 엔티티도 같이 삭제됩니다. ( onDelete: true )
+- 설문지의 is_complete 컬럼이 true인 경우만 유저가 설문지에 응답할 수 있습니다.
+- 설문지의 is_complete 컬럼이 true일 경우 수정 삭제가 불가능합니다.
+- 유저 테이블은 따로 존재하지 않습니다. (유저는 이미 생성되어 있다고 가정합니다.)
