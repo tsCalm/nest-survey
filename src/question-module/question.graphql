@@ -12,7 +12,7 @@ type SurveyQuestion {
 }
 
 type Query {
-  questionList: [SurveyQuestion]
+  questionList(page: Int, size: Int): [SurveyQuestion]
   question(id: Int!): SurveyQuestion
 }
 

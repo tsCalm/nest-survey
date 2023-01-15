@@ -8,13 +8,13 @@ export class SurveyResolver {
   constructor(private surveyService: SurveyService) {}
 
   @Query()
-  surveyList() {
-    return this.surveyService.findAll();
+  surveyList(@Args('page') page: number, @Args('size') size: number) {
+    return this.surveyService.findAll(page, size);
   }
 
   @Query()
-  completeSurveyList() {
-    return this.surveyService.findAllCompleteSurvey();
+  completeSurveyList(@Args('page') page: number, @Args('size') size: number) {
+    return this.surveyService.findAllCompleteSurvey(page, size);
   }
 
   @Query()

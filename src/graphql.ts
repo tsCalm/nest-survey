@@ -77,16 +77,16 @@ export interface SurveyQuestionOption {
 }
 
 export interface IQuery {
-    optionList(): Nullable<Nullable<SurveyQuestionOption>[]> | Promise<Nullable<Nullable<SurveyQuestionOption>[]>>;
+    optionList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<SurveyQuestionOption>[]> | Promise<Nullable<Nullable<SurveyQuestionOption>[]>>;
     option(id: number): Nullable<SurveyQuestionOption> | Promise<Nullable<SurveyQuestionOption>>;
-    questionList(): Nullable<Nullable<SurveyQuestion>[]> | Promise<Nullable<Nullable<SurveyQuestion>[]>>;
+    questionList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<SurveyQuestion>[]> | Promise<Nullable<Nullable<SurveyQuestion>[]>>;
     question(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
-    surveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
+    surveyList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
     survey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
-    completeSurveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
-    userResponseList(): Nullable<Nullable<UserResponse>[]> | Promise<Nullable<Nullable<UserResponse>[]>>;
+    completeSurveyList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
+    userResponseList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<UserResponse>[]> | Promise<Nullable<Nullable<UserResponse>[]>>;
     userResponse(findUserResponseInput?: Nullable<UserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
-    completedSurveyList(): Nullable<Nullable<UserSurvey>[]> | Promise<Nullable<Nullable<UserSurvey>[]>>;
+    completedSurveyList(page?: Nullable<number>, size?: Nullable<number>): Nullable<Nullable<UserSurvey>[]> | Promise<Nullable<Nullable<UserSurvey>[]>>;
     completedSurvey(userSurveyInput?: Nullable<UserSurveyInput>): Nullable<UserSurvey> | Promise<Nullable<UserSurvey>>;
 }
 

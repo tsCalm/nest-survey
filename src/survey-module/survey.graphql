@@ -11,9 +11,9 @@ type Survey {
 }
 
 type Query {
-  surveyList: [Survey]
+  surveyList(page: Int, size: Int): [Survey]
   survey(id: Int!): Survey
-  completeSurveyList: [Survey]
+  completeSurveyList(page: Int, size: Int): [Survey]
 }
 
 type Mutation {

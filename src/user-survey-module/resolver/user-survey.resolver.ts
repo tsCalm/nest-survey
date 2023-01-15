@@ -7,8 +7,8 @@ export class UserSurveyResolver {
   constructor(private userSurveyService: UserSurveyService) {}
 
   @Query()
-  completedSurveyList() {
-    return this.userSurveyService.completedFindAll();
+  completedSurveyList(@Args('page') page: number, @Args('size') size: number) {
+    return this.userSurveyService.completedFindAll(page, size);
   }
 
   @Query()

@@ -33,13 +33,15 @@ export class UserSurveyService extends BaseService<UserSurvey> {
     return is_complete;
   }
 
-  completedFindAll() {
+  completedFindAll(page: number = 1, size: number = 20) {
     return this.userSurveyRepo.find({
       select: ['survey', 'user_responses'],
       where: {
         is_complete: true,
       },
       relations: ['survey', 'user_responses', 'user_responses.question'],
+      skip: (page - 1) * size,
+      take: size,
     });
   }
 

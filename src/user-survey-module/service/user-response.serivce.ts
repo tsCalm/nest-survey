@@ -33,8 +33,14 @@ export class UserResponseService extends BaseService<UserResponse> {
     return await this.userSurveyService.isComplete(survey_id, user_id);
   }
 
-  findAll() {
-    return this.userResponseRepo.find({});
+  findAll(page: number = 1, size: number = 20) {
+    return this.userResponseRepo.find({
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   async findOne(findUserResponseInput: UserResponseInput) {

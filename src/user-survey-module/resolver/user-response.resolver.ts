@@ -10,8 +10,8 @@ export class UserResponseResolver {
   constructor(private userResponseService: UserResponseService) {}
 
   @Query()
-  userResponseList() {
-    return this.userResponseService.findAll();
+  userResponseList(@Args('page') page: number, @Args('size') size: number) {
+    return this.userResponseService.findAll(page, size);
   }
 
   @Query()

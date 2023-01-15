@@ -8,8 +8,8 @@ export class OptionResolver {
   constructor(private optionService: OptionService) {}
 
   @Query()
-  optionList() {
-    return this.optionService.findAll();
+  optionList(@Args('page') page: number, @Args('size') size: number) {
+    return this.optionService.findAll(page, size);
   }
 
   @Query()

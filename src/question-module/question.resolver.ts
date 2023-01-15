@@ -8,8 +8,8 @@ export class QuestionResolver {
   constructor(private questionService: QuestionService) {}
 
   @Query()
-  questionList() {
-    return this.questionService.findAll();
+  questionList(@Args('page') page: number, @Args('size') size: number) {
+    return this.questionService.findAll(page, size);
   }
 
   @Query()

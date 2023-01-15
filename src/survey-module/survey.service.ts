@@ -43,13 +43,24 @@ export class SurveyService extends BaseService<Survey> {
         statusCode: 400,
       });
   }
-  findAll() {
-    return this.surveyRepo.find();
+  findAll(page: number = 1, size: number = 20) {
+    return this.surveyRepo.find({
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
-  findAllCompleteSurvey() {
+  findAllCompleteSurvey(page: number = 1, size: number = 20) {
     return this.surveyRepo.find({
       where: {
         is_complete: true,
+      },
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC',
       },
     });
   }

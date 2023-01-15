@@ -8,7 +8,7 @@ type UserSurvey {
 }
 
 type Query {
-  completedSurveyList: [UserSurvey]
+  completedSurveyList(page: Int, size: Int): [UserSurvey]
   completedSurvey(userSurveyInput: UserSurveyInput): UserSurvey
 }
 

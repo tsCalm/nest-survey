@@ -8,7 +8,7 @@ type SurveyQuestionOption {
 }
 
 type Query {
-  optionList: [SurveyQuestionOption]
+  optionList(page: Int, size: Int): [SurveyQuestionOption]
   option(id: Int!): SurveyQuestionOption
 }
 

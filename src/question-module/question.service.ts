@@ -16,8 +16,14 @@ export class QuestionService extends BaseService<SurveyQuestion> {
     super('question');
   }
 
-  findAll() {
-    return this.questionRepo.find();
+  findAll(page: number = 1, size: number = 20) {
+    return this.questionRepo.find({
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   findOne(id: number) {

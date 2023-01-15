@@ -6,7 +6,7 @@ type UserResponse {
 }
 
 type Query {
-  userResponseList: [UserResponse]
+  userResponseList(page: Int, size: Int): [UserResponse]
   userResponse(findUserResponseInput: UserResponseInput): UserResponse
 }
 

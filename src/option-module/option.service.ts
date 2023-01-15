@@ -18,8 +18,17 @@ export class OptionService extends BaseService<SurveyQuestionOption> {
     super('option');
   }
 
-  findAll(): Promise<SurveyQuestionOption[]> {
-    return this.repo.find();
+  findAll(
+    page: number = 1,
+    size: number = 20,
+  ): Promise<SurveyQuestionOption[]> {
+    return this.repo.find({
+      skip: (page - 1) * size,
+      take: size,
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   async findOne(id: number) {
