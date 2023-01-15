@@ -13,6 +13,7 @@ type Survey {
 type Query {
   surveyList: [Survey]
   survey(id: Int!): Survey
+  completeSurveyList: [Survey]
 }
 
 type Mutation {

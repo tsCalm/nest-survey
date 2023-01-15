@@ -22,49 +22,45 @@
 
 - API 기능 구현
 
-  - 설문지 CRUD o
-  - 문항 CRUD o
-  - 선택지 CRUD o
-  - 답변 CRUD ????
-    (답변을 하나만 호출하는 경우가 뭐지??, 답변 전체를 호출하는 api는 왜 필요하지??)
-  - 설문지 완료 o
-  - 완료된 설문지 확인 o
-
-- 에러 처리 o
-
-  - 요청 실패 시 적절한 에러를 리턴해야 합니다.
-  - 에러 응답에 제한은 없지만 일관되게 응답해야 합니다.
-
-- 로그 0
-  - 에러 및 특이사항 발생시 로그를 확인하여 대처할 수 있게 작성
-
-## 공지사항
-
-- entity 부모 엔티티 삭제 시 자식 엔티티도 같이 삭제됩니다. ( onDelete: true )
-
-## 실행 방법
-
-1. 개발환경과 버전을 맞춰주세요.
-2. postgresql 유저, 데이터베이스를 생성합니다. (postgresql download 완료 상태라고 가정합니다.)
-
-```
-psql postgres   <-- 터미널을 통해 postgresql에 접속합니다.
-CREATE USER maum;  <-- 유저를 생성합니다.
-ALTER USER maum PASSWORD '1234'; <-- 생성된 유저의 비밀번호를 1234로 설정합니다.
-ALTER USER maum CREATEDB;  <-- maum 유저에게 데이터베이스 생성 권한을 부여합니다.
-CREATE DATABASE survey; <-- 데이터베이스를 생성합니다.
-```
-
-3. .env 파일의 postgresql 변수를 설정합니다.
-
-4. 터미널에서 명령을 실행합니다.
-
-```
-npm i
-npm run start:dev
-```
-
-## 요구사항 해결
+  - 설문지 CRUD
+    - query
+      1. surveyList : 설문지 리스트를 리턴합니다. ( relations x )
+      2. survey: 설문지 상세보기 ( relations o )
+    - mutation
+      1. createSurvey : 설문지 생성
+      2. updateSurvey : 설문지 업데이트 (설문지의 이름, 설명, 인사말 업데이트)
+      3. deleteSurvey : 설문지 삭제 ( 설문지의 문항과 보기가 전부 삭제됩니다.)
+      4. completeSurvey : 설문지 작성을 완료하여 유저가 설문지에 응답할 수 있도록 합니다.
+  - 문항 CRUD
+    - query
+      1. questionList : 문항 리스트를 리턴합니다. ( relations x )
+      2. question: 문항 상세보기 ( relations o )
+    - mutation
+      1. createQuestion : 문항 생성
+      2. updateQuestion : 문항 업데이트
+      3. deleteQuestion : 설문지 삭제 ( 설문지의 문항과 보기가 전부 삭제됩니다.)
+  - 선택지 CRUD
+    - query
+      1. optionList : 보기 리스트를 리턴합니다.
+      2. option: 보기 상세보기
+    - mutation
+      1. createOption : 보기 생성
+      2. updateOption : 보기 업데이트
+      3. deleteOption : 보기 삭제
+  - 답변 CRUD
+    - query
+      1. userResponseList : 유저 응답 리스트
+      2. userResponse : 유저 응답
+    - mutation
+      1. saveUserSelectOption : 유저 응답 생성 및 저장
+      2. deleteUserSelectOption : 유저 응답 삭제
+  - 설문지 완료
+    - completeSurvey : 설문지 생성 완료
+    - completeUserSurvey : 유저 설문지 응답 완료
+  - 완료된 설문지 확인
+    - completeSurveyList : 작성 완료된 설문지 리스트
+    - completedSurveyList : 유저 응답 완료된 설문지 리스트
+    - completedSurvey : 유저 응답 완료 설문지 상세
 
 - 에러 처리
 
@@ -95,3 +91,40 @@ npm run start:dev
       ...
       app.useLogger(new MyLogger());
     ```
+
+## 공지사항
+
+- entity 부모 엔티티 삭제 시 자식 엔티티도 같이 삭제됩니다. ( onDelete: true )
+- 설문지의 is_complete 컬럼이 true인 경우만 유저가 설문지에 응답할 수 있습니다.
+- 설문지의 is_complete 컬럼이 true일 경우 수정 삭제가 불가능합니다.
+- 유저 테이블은 따로 존재하지 않습니다.
+
+## 시나리오
+
+1. 설문지, 문항, 보기 리스트를 생성합니다.
+2. 설문지 생성 완료 요청을 보냅니다. (survey.is_complete= true)
+3. 설문지 생성이 완료된 설문지에 설문 참가 요청을 보냅니다.
+4. 설문지 응답을 완료한 후 유저 설문 응답 완료 요청을 보냅니다. (user_survey.is_complete = true)
+5. 완료된 설문을 확인할 수 있습니다.
+
+## 실행 방법
+
+1. 개발환경과 버전을 맞춰주세요.
+2. postgresql 유저, 데이터베이스를 생성합니다. (postgresql download 완료 상태라고 가정합니다.)
+
+```
+psql postgres   <-- 터미널을 통해 postgresql에 접속합니다.
+CREATE USER maum;  <-- 유저를 생성합니다.
+ALTER USER maum PASSWORD '1234'; <-- 생성된 유저의 비밀번호를 1234로 설정합니다.
+ALTER USER maum CREATEDB;  <-- maum 유저에게 데이터베이스 생성 권한을 부여합니다.
+CREATE DATABASE survey; <-- 데이터베이스를 생성합니다.
+```
+
+3. .env 파일의 postgresql 변수를 설정합니다.
+
+4. 터미널에서 명령을 실행합니다.
+
+```
+npm i
+npm run start:dev
+```

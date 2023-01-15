@@ -46,7 +46,13 @@ export class SurveyService extends BaseService<Survey> {
   findAll() {
     return this.surveyRepo.find();
   }
-
+  findAllCompleteSurvey() {
+    return this.surveyRepo.find({
+      where: {
+        is_complete: true,
+      },
+    });
+  }
   findOne(id: number) {
     return this.surveyRepo.findOne({
       where: {

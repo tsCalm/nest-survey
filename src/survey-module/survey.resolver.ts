@@ -14,6 +14,11 @@ export class SurveyResolver {
   }
 
   @Query()
+  completeSurveyList() {
+    return this.surveyService.findAllCompleteSurvey();
+  }
+
+  @Query()
   survey(@Args('id') id: number) {
     return this.surveyService.findOneDetail(id);
   }
@@ -34,12 +39,12 @@ export class SurveyResolver {
   }
 
   @Mutation()
-  deleteSurvey(@Args('id') id: number) {
-    return this.surveyService.delete(id);
+  completeSurvey(@Args('id') id: number) {
+    return this.surveyService.completeSurvey(id);
   }
 
   @Mutation()
-  completeSurvey(@Args('id') id: number) {
-    return this.surveyService.completeSurvey(id);
+  deleteSurvey(@Args('id') id: number) {
+    return this.surveyService.delete(id);
   }
 }
