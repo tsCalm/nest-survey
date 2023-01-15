@@ -33,14 +33,4 @@ export class UserSurvey {
 
   @OneToMany(() => UserResponse, (userResponse) => userResponse.user_survey)
   user_responses: UserResponse[];
-
-  @AfterLoad()
-  calcTotalScore() {
-    if (this.is_complete && this.user_responses?.length > 0) {
-      const user_total_score = this.user_responses
-        .map((resp) => resp.question.score)
-        .reduce((cur, acc) => cur + acc, 0);
-      this.user_total_score = user_total_score;
-    }
-  }
 }

@@ -5,7 +5,17 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { Survey } from '../survey-module/survey.entity';
-const entities = [Survey];
+import { SurveyQuestion } from '../question-module/question.entity';
+import { SurveyQuestionOption } from '../option-module/option.entity';
+import { UserSurvey } from '../user-survey-module/entity/user-survey.entity';
+import { UserResponse } from '../user-survey-module/entity/user-response.entity';
+const entities = [
+  Survey,
+  SurveyQuestion,
+  SurveyQuestionOption,
+  UserSurvey,
+  UserResponse,
+];
 
 export default entities;
 class TypeOrmConfig {
@@ -19,7 +29,6 @@ class TypeOrmConfig {
       database: configService.get('DB_NAME'),
       entities,
       synchronize: true,
-      // configService.get('NODE_ENV') === 'dev',
       logging: false,
       autoLoadEntities: true,
     };

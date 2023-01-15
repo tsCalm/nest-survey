@@ -7,6 +7,7 @@ import { STATUS_CODES } from 'http';
 import { QueryFailedExceptionFilter } from './filter/query-exception.filter';
 import { MyLogger } from './logger/logger.service';
 import { GqlExceptionFilter } from './filter/gql-exception.filter';
+import './data';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -35,8 +36,11 @@ async function bootstrap() {
   );
   app.useLogger(new MyLogger());
   const port = configService.get('PORT');
+
+  const temp = app.get;
   await app.listen(port).then(async () => {
     console.log(`port: ${port} server start!!`);
+    // await SeedSurvey();
   });
 }
 bootstrap();

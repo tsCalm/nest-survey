@@ -22,6 +22,7 @@ export class SurveyQuestionOption extends BaseEntity {
   question_id: number;
 
   @ManyToOne(() => SurveyQuestion, (question) => question.options, {
+    cascade: true,
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'question_id', referencedColumnName: 'id' })
