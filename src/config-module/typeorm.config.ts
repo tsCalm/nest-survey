@@ -1,14 +1,13 @@
-import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { Survey } from '../survey-module/survey.entity';
-import { SurveyQuestion } from '../question-module/question.entity';
 import { SurveyQuestionOption } from '../option-module/option.entity';
-import { UserSurvey } from '../user-survey-module/entity/user-survey.entity';
+import { SurveyQuestion } from '../question-module/question.entity';
+import { Survey } from '../survey-module/survey.entity';
 import { UserResponse } from '../user-survey-module/entity/user-response.entity';
+import { UserSurvey } from '../user-survey-module/entity/user-survey.entity';
 const entities = [
   Survey,
   SurveyQuestion,

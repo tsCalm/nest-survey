@@ -1,13 +1,6 @@
-import { SurveyQuestion } from '../../question-module/question.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  PrimaryColumn,
-  JoinColumn,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { BaseEntity } from '../../common/base-entity';
+import { SurveyQuestion } from '../../question-module/question.entity';
 import { UserSurvey } from './user-survey.entity';
 
 @Entity()

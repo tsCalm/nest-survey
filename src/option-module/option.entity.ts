@@ -1,13 +1,6 @@
-import { SurveyQuestion } from '../question-module/question.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  Index,
-} from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
+import { SurveyQuestion } from '../question-module/question.entity';
 
 @Entity()
 export class SurveyQuestionOption extends BaseEntity {

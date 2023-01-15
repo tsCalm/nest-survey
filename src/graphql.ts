@@ -83,6 +83,7 @@ export interface IQuery {
     question(id: number): Nullable<SurveyQuestion> | Promise<Nullable<SurveyQuestion>>;
     surveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
     survey(id: number): Nullable<Survey> | Promise<Nullable<Survey>>;
+    completeSurveyList(): Nullable<Nullable<Survey>[]> | Promise<Nullable<Nullable<Survey>[]>>;
     userResponseList(): Nullable<Nullable<UserResponse>[]> | Promise<Nullable<Nullable<UserResponse>[]>>;
     userResponse(findUserResponseInput?: Nullable<UserResponseInput>): Nullable<UserResponse> | Promise<Nullable<UserResponse>>;
     completedSurveyList(): Nullable<Nullable<UserSurvey>[]> | Promise<Nullable<Nullable<UserSurvey>[]>>;

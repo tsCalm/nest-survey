@@ -97,9 +97,6 @@ export const SeedOption = async (
   connection: DataSource,
   question: SurveyQuestion,
 ) => {
-  // let connection = await getConnection();
-  // 5문제
-
   const findedOption = await connection.manager
     .getRepository(SurveyQuestionOption)
     .find({

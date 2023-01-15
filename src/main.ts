@@ -1,13 +1,13 @@
-import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { ApolloError } from 'apollo-server-express';
-import { AppModule } from './app.module';
 import { STATUS_CODES } from 'http';
+import { AppModule } from './app.module';
+import { createDummyData } from './data';
+import { GqlExceptionFilter } from './filter/gql-exception.filter';
 import { QueryFailedExceptionFilter } from './filter/query-exception.filter';
 import { MyLogger } from './logger/logger.service';
-import { GqlExceptionFilter } from './filter/gql-exception.filter';
-import { createDummyData } from './data';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -18,7 +18,6 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       disableErrorMessages: false,
-      // class-validator error를 catch할 수 있음
       exceptionFactory: (error) => {
         throw new ApolloError(
           `${error.map((i) => Object.values(i.constraints)[0])}`,

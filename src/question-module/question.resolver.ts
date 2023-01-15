@@ -1,8 +1,7 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { QuestionService } from './question.service';
 import { CreateQuestionInput, UpdateQuestionInput } from './question.dto';
+import { QuestionService } from './question.service';
 
 @Resolver('Question')
 export class QuestionResolver {

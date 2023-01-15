@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from '../common/base-service';
+import { QuestionService } from 'src/question-module/question.service';
 import { DeleteResult, Repository } from 'typeorm';
+import { BaseService } from '../common/base-service';
+import { SurveyService } from '../survey-module/survey.service';
 import { CreateOptionInput, UpdateOptionInput } from './option.dto';
 import { SurveyQuestionOption } from './option.entity';
-import { SurveyService } from '../survey-module/survey.service';
-import { QuestionService } from 'src/question-module/question.service';
 
 @Injectable()
 export class OptionService extends BaseService<SurveyQuestionOption> {

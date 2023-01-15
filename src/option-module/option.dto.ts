@@ -1,11 +1,5 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import {
-  IsEnum,
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @ArgsType()
 export class CreateOptionInput {

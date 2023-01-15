@@ -17,7 +17,6 @@ const surveySeedTemplate = (id: number) => {
 };
 
 export const SeedSurvey = async (connection: DataSource) => {
-  // let connection = await getConnection();
   const findedEntity = await connection.manager
     .getRepository(Survey)
     .find({ take: 4 });

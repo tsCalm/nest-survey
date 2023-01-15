@@ -1,17 +1,15 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from '../../common/base-service';
-import { DeleteResult, Repository } from 'typeorm';
-import { UserSurvey } from '../entity/user-survey.entity';
-import { STATUS_CODES } from 'http';
 import { ApolloError } from 'apollo-server-express';
-import { UserResponse } from '../entity/user-response.entity';
+import { STATUS_CODES } from 'http';
+import { DeleteResult, Repository } from 'typeorm';
+import { BaseService } from '../../common/base-service';
 import {
   SaveUserResponseInput,
   UserResponseInput,
 } from '../dto/user-response.dto';
+import { UserResponse } from '../entity/user-response.entity';
 import { UserSurveyService } from './user-survey.service';
-import { GraphQLError } from 'graphql';
 
 @Injectable()
 export class UserResponseService extends BaseService<UserResponse> {

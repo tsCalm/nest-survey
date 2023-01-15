@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../common/base-entity';
 import { SurveyQuestion } from '../question-module/question.entity';
 import { UserSurvey } from '../user-survey-module/entity/user-survey.entity';

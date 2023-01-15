@@ -1,4 +1,3 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserSurveyInput } from '../dto/user-survey.dto';
 import { UserSurveyService } from '../service/user-survey.service';

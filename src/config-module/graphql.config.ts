@@ -7,8 +7,6 @@ import { UserInputError } from 'apollo-server-express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { join } from 'path';
 import { QueryFailedError } from 'typeorm';
-//import { ApolloServerPluginCacheControl } from 'apollo-server-core/dist/plugin/cacheControl';
-//import { InMemoryCache, ApolloClient } from '@apollo/client';
 
 class GraphQLConfig {
   static getConfig(configService: ConfigService) {
@@ -36,9 +34,3 @@ export const graphQLConfigAsync: GqlModuleAsyncOptions = {
     GraphQLConfig.getConfig(configService),
   inject: [ConfigService],
 };
-/*
-export const client = new ApolloClient({
-  // ...other arguments...
-  cache: new InMemoryCache({addTypename: true})
-});
-*/

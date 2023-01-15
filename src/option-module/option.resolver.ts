@@ -1,8 +1,7 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { OptionService } from './option.service';
 import { CreateOptionInput, UpdateOptionInput } from './option.dto';
+import { OptionService } from './option.service';
 
 @Resolver('SurveyQuestionOption')
 export class OptionResolver {

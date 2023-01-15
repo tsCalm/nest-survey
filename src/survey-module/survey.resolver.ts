@@ -1,8 +1,7 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { SurveyService } from './survey.service';
 import { CreateSurveyInput, UpdateSurveyInput } from './survey.dto';
+import { SurveyService } from './survey.service';
 
 @Resolver('Survey')
 export class SurveyResolver {

@@ -1,12 +1,6 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ApolloError } from 'apollo-server-express';
 import { STATUS_CODES } from 'http';
-// import { IError } from '../common/response-class';
-// import { IResObj } from '../common/response-class';
-// import { IResObjList } from '../common/response-class';
-import { BaseEntity, FindOptionsWhere } from 'typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 
 export abstract class BaseService<T> {
   objName: string;

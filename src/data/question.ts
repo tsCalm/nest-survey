@@ -18,8 +18,6 @@ export const SeedQuestion = async (
   connection: DataSource,
   survey_id: number,
 ) => {
-  // let connection = await getConnection();
-  // 5문제
   const orders = [
     {
       title: '당신이 희망하는 해외여행 종류는?',

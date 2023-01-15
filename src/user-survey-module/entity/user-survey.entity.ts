@@ -1,13 +1,11 @@
 import {
-  Entity,
   Column,
-  PrimaryColumn,
-  ManyToOne,
+  Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  AfterLoad,
+  PrimaryColumn,
 } from 'typeorm';
-import { BaseEntity } from '../../common/base-entity';
 import { Survey } from '../../survey-module/survey.entity';
 import { UserResponse } from './user-response.entity';
 
