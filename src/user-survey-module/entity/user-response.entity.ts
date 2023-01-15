@@ -21,7 +21,7 @@ export class UserResponse extends BaseEntity {
   @PrimaryColumn()
   question_id: number;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: false, comment: '유저 응답' })
   user_answer: string;
 
   @ManyToOne(() => UserSurvey, (survey) => survey.user_responses, {

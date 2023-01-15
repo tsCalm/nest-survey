@@ -13,16 +13,20 @@ import { UserResponse } from './user-response.entity';
 
 @Entity()
 export class UserSurvey {
-  @PrimaryColumn()
+  @PrimaryColumn({ comment: '작성 완료된 설문지 아이디' })
   survey_id: number;
 
-  @PrimaryColumn({ type: 'int' })
+  @PrimaryColumn({ type: 'int', comment: '유저 아이디' })
   user_id: number;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ type: 'int', default: 0, comment: '응답 설문지 총점' })
   user_total_score: number;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({
+    type: 'boolean',
+    default: false,
+    comment: '유저 설문 응답 완료 여부',
+  })
   is_complete: boolean;
 
   @ManyToOne(() => Survey, (survey) => survey.user_survey, {

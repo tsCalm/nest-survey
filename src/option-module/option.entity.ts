@@ -11,10 +11,10 @@ import { BaseEntity } from '../common/base-entity';
 
 @Entity()
 export class SurveyQuestionOption extends BaseEntity {
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', comment: '보기 이름' })
   text: string;
 
-  @Column({ type: 'smallint' })
+  @Column({ type: 'smallint', comment: '보기 순서' })
   order: number;
 
   @Column({ type: 'int', nullable: false })
