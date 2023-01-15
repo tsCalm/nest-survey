@@ -5,8 +5,8 @@ import { Survey } from '../survey-module/survey.entity';
 import { SurveyQuestionOption } from './option.entity';
 import { OptionResolver } from './option.resolver';
 import { OptionService } from './option.service';
-import { SurveyQuestion } from 'src/question-module/question.entity';
-import { QuestionService } from 'src/question-module/question.service';
+import { SurveyQuestion } from '../question-module/question.entity';
+import { QuestionService } from '../question-module/question.service';
 
 @Module({
   imports: [

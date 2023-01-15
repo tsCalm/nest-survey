@@ -1,12 +1,8 @@
 import { ApolloDriver } from '@nestjs/apollo';
 import { ConfigService } from '@nestjs/config';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 import { GqlModuleAsyncOptions } from '@nestjs/graphql';
-import { ApolloError } from 'apollo-server-errors';
-import { UserInputError } from 'apollo-server-express';
-import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { GraphQLError } from 'graphql';
 import { join } from 'path';
-import { QueryFailedError } from 'typeorm';
 
 class GraphQLConfig {
   static getConfig(configService: ConfigService) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QuestionService } from 'src/question-module/question.service';
+import { QuestionService } from '../question-module/question.service';
 import { DeleteResult, Repository } from 'typeorm';
 import { BaseService } from '../common/base-service';
 import { SurveyService } from '../survey-module/survey.service';

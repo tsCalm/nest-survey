@@ -1,4 +1,4 @@
-import { SurveyQuestionOption } from 'src/option-module/option.entity';
+import { SurveyQuestionOption } from '../option-module/option.entity';
 import { DataSource } from 'typeorm';
 import { SurveyQuestion } from '../question-module/question.entity';
 
