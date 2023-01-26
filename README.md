@@ -105,7 +105,7 @@
 
 ```
 psql postgres   <-- 터미널을 통해 postgresql에 접속합니다.
-CREATE USER maum;  <-- 유저를 생성합니다.
+CREATE USER USER_NAME;  <-- 유저를 생성합니다.
 ALTER USER maum PASSWORD '1234'; <-- 생성된 유저의 비밀번호를 1234로 설정합니다.
 ALTER USER maum CREATEDB;  <-- maum 유저에게 데이터베이스 생성 권한을 부여합니다.
 CREATE DATABASE survey; <-- 데이터베이스를 생성합니다.
