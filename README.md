@@ -8,6 +8,10 @@
 - postgresql version: 14.6 (Homebrew)
 - nest-cli version: 9.0.0
 
+## ERD
+
+<img width="617" alt="nest-survey-erd" src="https://user-images.githubusercontent.com/106916440/215049191-068fdc6b-94a3-4463-8b95-d44ecf8d419a.png">
+
 ## 실행 방법
 
 1. 개발환경과 버전을 맞춰주세요.
