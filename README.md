@@ -14,7 +14,7 @@
 
 ## ERD
 
-<img width="617" alt="nest-survey-erd" src="https://user-images.githubusercontent.com/106916440/215049191-068fdc6b-94a3-4463-8b95-d44ecf8d419a.png">
+![image](https://user-images.githubusercontent.com/106916440/215620835-440f0ff5-859d-4344-998a-171fafdc6120.png)
 
 - survey : 설문지
 - surveyQuestion : 설문지의 문항
