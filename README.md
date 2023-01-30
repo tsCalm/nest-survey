@@ -8,6 +8,10 @@
 - postgresql version: 14.6 (Homebrew)
 - nest-cli version: 9.0.0
 
+## 레이어드 
+
+![레이어드아키텍쳐](https://user-images.githubusercontent.com/106916440/215605959-3d41db96-3fce-41f1-b7aa-1d1671b92546.png)
+
 ## ERD
 
 <img width="617" alt="nest-survey-erd" src="https://user-images.githubusercontent.com/106916440/215049191-068fdc6b-94a3-4463-8b95-d44ecf8d419a.png">
