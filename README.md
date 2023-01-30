@@ -16,6 +16,12 @@
 
 <img width="617" alt="nest-survey-erd" src="https://user-images.githubusercontent.com/106916440/215049191-068fdc6b-94a3-4463-8b95-d44ecf8d419a.png">
 
+- survey : 설문지
+- surveyQuestion : 설문지의 문항
+- surveyQuestionOption : 문항의 선택지
+- userSurvey : 유저가 참여한 설문지
+- userResponse : 유저가 선택한 답변
+
 ## directory tree
 
 ```bash
