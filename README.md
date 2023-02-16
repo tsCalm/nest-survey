@@ -8,7 +8,7 @@
 - postgresql version: 14.6 (Homebrew)
 - nest-cli version: 9.0.0
 
-## 레이어드 아키텍처
+## [레이어드 아키텍처](https://hssm93.tistory.com/entry/%EB%A0%88%EC%9D%B4%EC%96%B4%EB%93%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-Layered-Architecture-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90)
 
 ![레이어드아키텍쳐](https://user-images.githubusercontent.com/106916440/215605959-3d41db96-3fce-41f1-b7aa-1d1671b92546.png)
 
